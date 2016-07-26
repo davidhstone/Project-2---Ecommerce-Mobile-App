@@ -1,23 +1,61 @@
 package com.example.davidstone.record_store;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    RecyclerView mRecyclerView;
+    MainRecyclerViewAdapter mainRecyclerViewAdapter;
+    Button mTestScreenSwitchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.mainrecyclerview);
+
+        LinearLayoutManager linearLayoutManager =
+                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+
+        List<CustomObjectMain> customObjectMainList = new ArrayList<>();
+
+        //THIS CODE BELOW IS TO TEST
+        customObjectMainList.add(new CustomObjectMain(R.color.colorAccent,
+                "First Band Name", "First album name"));
+
+        mainRecyclerViewAdapter = new MainRecyclerViewAdapter(customObjectMainList);
+        mRecyclerView.setAdapter(mainRecyclerViewAdapter);
+
+        mTestScreenSwitchButton = (Button) findViewById(R.id.button2);
+
+        mTestScreenSwitchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ItemActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         //      FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         //      fab.setOnClickListener(new View.OnClickListener() {
