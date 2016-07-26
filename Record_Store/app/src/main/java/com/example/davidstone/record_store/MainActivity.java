@@ -41,11 +41,13 @@ public class MainActivity extends AppCompatActivity {
 
         //THIS CODE BELOW IS TO TEST
         customObjectMainList.add(new CustomObjectMain(R.color.colorAccent,
-                "First Band Name", "First album name"));
+                "AC/DC", "PowerAge"));
+        //END TEST
 
         mainRecyclerViewAdapter = new MainRecyclerViewAdapter(customObjectMainList);
         mRecyclerView.setAdapter(mainRecyclerViewAdapter);
 
+        //THIS CODE BELOW IS TO TEST
         mTestScreenSwitchButton = (Button) findViewById(R.id.button2);
 
         mTestScreenSwitchButton.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //END TEST
+
 
 
         //      FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

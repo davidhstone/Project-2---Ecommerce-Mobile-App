@@ -11,6 +11,7 @@ public class CustomObjectMain {
     String mBandName;
     String mAlbumName;
 
+
     public CustomObjectMain() {
 
         mAlbumIcon = 999;
