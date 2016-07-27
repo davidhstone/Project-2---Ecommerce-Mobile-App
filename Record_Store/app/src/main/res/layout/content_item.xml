@@ -12,6 +12,16 @@
     tools:context="com.example.davidstone.record_store.ItemActivity"
     tools:showIn="@layout/activity_item">
 
+    <!-- THIS IS THE BASIC SCREEN SWITCH BUTTON  -->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go to cart screen"
+            android:id="@+id/button3"
+            android:layout_gravity="center_horizontal"
+
+            />
+
  <!-- THIS IS TESTING THE APPEARANCE OF THE DIALOG
   <LinearLayout
         android:layout_width="wrap_content"

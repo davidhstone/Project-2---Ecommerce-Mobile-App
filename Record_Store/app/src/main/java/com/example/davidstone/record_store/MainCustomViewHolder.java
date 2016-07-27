@@ -37,7 +37,4 @@ public class MainCustomViewHolder extends RecyclerView.ViewHolder {
       //  itemView.setOnClickListener((View.OnClickListener) this);
     }
 
-
-
-
 }
