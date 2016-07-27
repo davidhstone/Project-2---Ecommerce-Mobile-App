@@ -20,9 +20,10 @@
         </activity>
         <activity
             android:name=".ItemActivity"
-            android:parentActivityName=".MainActivity"
             android:label="@string/title_activity_item"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CartActivity"></activity>
     </application>
 
 </manifest>

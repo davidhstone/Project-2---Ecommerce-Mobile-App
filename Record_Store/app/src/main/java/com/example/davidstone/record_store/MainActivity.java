@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity  {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.mainrecyclerview);
 
+
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -62,8 +63,8 @@ public class MainActivity extends AppCompatActivity  {
         mRecyclerView.setAdapter(mainRecyclerViewAdapter);
         //END TEST
 
-        mainRecyclerViewAdapter = new MainRecyclerViewAdapter(customObjectMainList);
-        mRecyclerView.setAdapter(mainRecyclerViewAdapter);
+     //   mainRecyclerViewAdapter = new MainRecyclerViewAdapter(customObjectMainList);
+     //   mRecyclerView.setAdapter(mainRecyclerViewAdapter);
 
         /*THIS CODE BELOW IS TO TEST A BASIC SWITCH SCREEN BUTTON
         mTestScreenSwitchButton = (Button) findViewById(R.id.button2);

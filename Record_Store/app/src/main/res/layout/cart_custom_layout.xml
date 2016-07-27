@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+<!--ALL THIS BELOW MIGHT NOT REALLY BE RIGHT -->
+    <TextView
+        android:id="@+id/band_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Band Name"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="15dp"
+
+        />
+
+    <TextView
+        android:id="@+id/album_title_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Album Title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@id/band_textview"
+        android:layout_marginLeft="15dp"
+        />
+
+    <TextView
+        android:id="@+id/format_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Format"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@id/album_title_textview"
+        android:layout_marginLeft="15dp"
+
+        />
+
+    <TextView
+        android:id="@+id/price_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@id/format_textview"
+        android:layout_marginLeft="15dp"
+        />
+
+</RelativeLayout>
