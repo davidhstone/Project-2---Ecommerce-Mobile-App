@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +20,7 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ItemFragment.OnAlbumSelectedListener {
 
     RecyclerView mRecyclerView;
     MainRecyclerViewAdapter mainRecyclerViewAdapter;
@@ -31,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //THE CODE BELOW IS ADDED TO TEST FRAGMENT
+        Fragment itemFragment = ItemFragment.newInstance(null, this);
+        getSupportFragmentManager().beginTransaction().
+                add(R.id.fragment_container, itemFragment).commit();
+
+
+        /*
         mRecyclerView = (RecyclerView) findViewById(R.id.mainrecyclerview);
 
         LinearLayoutManager linearLayoutManager =
@@ -38,16 +48,17 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
         List<CustomObjectMain> customObjectMainList = new ArrayList<>();
+        */
 
-        //THIS CODE BELOW IS TO TEST
+        /*THIS CODE BELOW IS TO TEST
         customObjectMainList.add(new CustomObjectMain(R.color.colorAccent,
                 "AC/DC", "PowerAge"));
         customObjectMainList.add(new CustomObjectMain(R.color.colorPrimaryDark,
                 "RKL", "Keep Laughing"));
-        //END TEST
-
-        mainRecyclerViewAdapter = new MainRecyclerViewAdapter(customObjectMainList);
-        mRecyclerView.setAdapter(mainRecyclerViewAdapter);
+        */
+//THE CODE BELOW IS FOR THE NON-FRAGMENT RECYCLERVIEW
+      //  mainRecyclerViewAdapter = new MainRecyclerViewAdapter(customObjectMainList);
+      //  mRecyclerView.setAdapter(mainRecyclerViewAdapter);
 
         //THIS CODE BELOW IS TO TEST
       // mTestScreenSwitchButton = (Button) findViewById(R.id.button2);
@@ -71,6 +82,16 @@ public class MainActivity extends AppCompatActivity {
         //                      .setAction("Action", null).show();
         //          }
         //      });
+    }
+
+    @Override
+    public void onAlbumSelected(String selectedAlbum) {
+        Bundle bundle = new Bundle();
+        bundle.putString("selected_album", selectedAlbum);
+        Fragment detailFragment = DetailFragment.newInstance(bundle);
+        FragmentManager supportManager = getSupportFragmentManager();
+        FragmentTransaction transaction = supportManager.beginTransaction();
+        transaction.replace(R.id.fragment_container, detailFragment).commit();
     }
 
     @Override
