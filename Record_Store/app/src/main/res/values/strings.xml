@@ -4,5 +4,5 @@
     <string name="search_hint">Whatchoo Want?</string>
     <string name="cart_title_string">This your cart</string>
     <string name="title_activity_item">Full Album Info</string>
-    <string name="click_info_text">Click Anywhere For Full Album Info</string>
+    <string name="click_info_text">click for full album info</string>
 </resources>

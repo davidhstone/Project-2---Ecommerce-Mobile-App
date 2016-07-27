@@ -42,21 +42,23 @@ public class MainActivity extends AppCompatActivity {
         //THIS CODE BELOW IS TO TEST
         customObjectMainList.add(new CustomObjectMain(R.color.colorAccent,
                 "AC/DC", "PowerAge"));
+        customObjectMainList.add(new CustomObjectMain(R.color.colorPrimaryDark,
+                "RKL", "Keep Laughing"));
         //END TEST
 
         mainRecyclerViewAdapter = new MainRecyclerViewAdapter(customObjectMainList);
         mRecyclerView.setAdapter(mainRecyclerViewAdapter);
 
         //THIS CODE BELOW IS TO TEST
-        mTestScreenSwitchButton = (Button) findViewById(R.id.button2);
+      // mTestScreenSwitchButton = (Button) findViewById(R.id.button2);
 
-        mTestScreenSwitchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ItemActivity.class);
-                startActivity(intent);
-            }
-        });
+      // mTestScreenSwitchButton.setOnClickListener(new View.OnClickListener() {
+      //     @Override
+      //     public void onClick(View view) {
+      //         Intent intent = new Intent(view.getContext(), ItemActivity.class);
+      //         startActivity(intent);
+      //     }
+      // });
         //END TEST
 
 
