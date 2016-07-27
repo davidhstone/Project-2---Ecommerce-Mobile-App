@@ -20,11 +20,11 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ItemFragment.OnAlbumSelectedListener {
+public class MainActivity extends AppCompatActivity  {
 
     RecyclerView mRecyclerView;
     MainRecyclerViewAdapter mainRecyclerViewAdapter;
-    Button mTestScreenSwitchButton;
+  //  Button mTestScreenSwitchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +34,13 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnAl
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //THE CODE BELOW IS ADDED TO TEST FRAGMENT
-        Fragment itemFragment = ItemFragment.newInstance(null, this);
-        getSupportFragmentManager().beginTransaction().
-                add(R.id.fragment_container, itemFragment).commit();
+     //   //THE CODE BELOW IS ADDED TO TEST FRAGMENT
+     //   Fragment itemFragment = ItemFragment.newInstance(null, this);
+     //   getSupportFragmentManager().beginTransaction().
+     //           add(R.id.fragment_container, itemFragment).commit();
+//
 
 
-        /*
         mRecyclerView = (RecyclerView) findViewById(R.id.mainrecyclerview);
 
         LinearLayoutManager linearLayoutManager =
@@ -48,29 +48,34 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnAl
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
         List<CustomObjectMain> customObjectMainList = new ArrayList<>();
-        */
 
-        /*THIS CODE BELOW IS TO TEST
-        customObjectMainList.add(new CustomObjectMain(R.color.colorAccent,
-                "AC/DC", "PowerAge"));
-        customObjectMainList.add(new CustomObjectMain(R.color.colorPrimaryDark,
-                "RKL", "Keep Laughing"));
-        */
-//THE CODE BELOW IS FOR THE NON-FRAGMENT RECYCLERVIEW
-      //  mainRecyclerViewAdapter = new MainRecyclerViewAdapter(customObjectMainList);
-      //  mRecyclerView.setAdapter(mainRecyclerViewAdapter);
 
         //THIS CODE BELOW IS TO TEST
-      // mTestScreenSwitchButton = (Button) findViewById(R.id.button2);
+        customObjectMainList.add(new CustomObjectMain(R.color.colorAccent,
+                "AC/DC", "PowerAge"));
 
-      // mTestScreenSwitchButton.setOnClickListener(new View.OnClickListener() {
-      //     @Override
-      //     public void onClick(View view) {
-      //         Intent intent = new Intent(view.getContext(), ItemActivity.class);
-      //         startActivity(intent);
-      //     }
-      // });
+        customObjectMainList.add(new CustomObjectMain(R.color.colorPrimaryDark,
+                "RKL", "Keep Laughing"));
+
+//THE CODE BELOW IS FOR THE NON-FRAGMENT RECYCLERVIEW
+        mainRecyclerViewAdapter = new MainRecyclerViewAdapter(customObjectMainList);
+        mRecyclerView.setAdapter(mainRecyclerViewAdapter);
         //END TEST
+
+        mainRecyclerViewAdapter = new MainRecyclerViewAdapter(customObjectMainList);
+        mRecyclerView.setAdapter(mainRecyclerViewAdapter);
+
+        /*THIS CODE BELOW IS TO TEST A BASIC SWITCH SCREEN BUTTON
+        mTestScreenSwitchButton = (Button) findViewById(R.id.button2);
+
+        mTestScreenSwitchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ItemActivity.class);
+                startActivity(intent);
+            }
+        });
+        END TEST */
 
 
 
@@ -83,16 +88,16 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnAl
         //          }
         //      });
     }
-
-    @Override
-    public void onAlbumSelected(String selectedAlbum) {
-        Bundle bundle = new Bundle();
-        bundle.putString("selected_album", selectedAlbum);
-        Fragment detailFragment = DetailFragment.newInstance(bundle);
-        FragmentManager supportManager = getSupportFragmentManager();
-        FragmentTransaction transaction = supportManager.beginTransaction();
-        transaction.replace(R.id.fragment_container, detailFragment).commit();
-    }
+  // THE CODE BELOW IS FROM WHEN I TRIED TO USE FRAGMENTS. DID NOT WORK
+  // @Override
+  // public void onAlbumSelected(String selectedAlbum) {
+  //     Bundle bundle = new Bundle();
+  //     bundle.putString("selected_album", selectedAlbum);
+  //     Fragment detailFragment = DetailFragment.newInstance(bundle);
+  //     FragmentManager supportManager = getSupportFragmentManager();
+  //     FragmentTransaction transaction = supportManager.beginTransaction();
+  //     transaction.replace(R.id.fragment_container, detailFragment).commit();
+  // }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
