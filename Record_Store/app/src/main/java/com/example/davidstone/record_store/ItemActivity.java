@@ -169,6 +169,9 @@ public class ItemActivity extends AppCompatActivity {
 
             case R.id.shopping_cart:
 
+                Intent intent = new Intent(this, CartActivity.class);
+                startActivity(intent);
+
                 return true;
 
             case R.id.action_settings:

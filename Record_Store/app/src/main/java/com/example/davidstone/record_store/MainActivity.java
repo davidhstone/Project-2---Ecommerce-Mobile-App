@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,17 +109,24 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.search_badge:
+                Toast.makeText(MainActivity.this, "Get up a get git git a get down! " +
+                        "911's a joke in yo town", Toast.LENGTH_SHORT).show();
 
                 return true;
 
             case R.id.shopping_cart:
+                Toast.makeText(MainActivity.this, "BASE! How low can you go? "  +
+                                "Death row! What a brotha know!"
+                        , Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(this, CartActivity.class);
+                startActivity(intent);
 
                 return true;
 
             case R.id.action_settings:
 
                 return true;
-
 
             default:
 
