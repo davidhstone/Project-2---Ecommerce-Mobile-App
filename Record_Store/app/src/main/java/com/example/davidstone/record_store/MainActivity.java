@@ -127,10 +127,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.search_badge:
-                Toast.makeText(MainActivity.this, "Get up a get git git a get down! " +
-                        "911's a joke in yo town", Toast.LENGTH_SHORT).show();
 
-
+             //   Toast.makeText(MainActivity.this, "Get up a get git git a get down! " +
+             //           "911's a joke in yo town", Toast.LENGTH_SHORT).show();
 
                 return true;
 
