@@ -12,15 +12,75 @@
     tools:context="com.example.davidstone.record_store.ItemActivity"
     tools:showIn="@layout/activity_item">
 
-    <!-- THIS IS THE BASIC SCREEN SWITCH BUTTON  -->
+    <!-- THIS IS THE BASIC SCREEN SWITCH BUTTON WHICH I USED TO TEST
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Go to cart screen"
             android:id="@+id/button3"
             android:layout_gravity="center_horizontal"
+            />    -->
 
-            />
+    <TextView
+        android:id="@+id/bandName_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/band_name_text"
+        android:textStyle="bold"
+
+        />
+
+    <TextView
+        android:id="@+id/albumTitle_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/album_title_text"
+        android:textStyle="bold"
+        android:layout_below="@id/album_title_textview"
+        />
+
+    <TextView
+        android:id="@+id/genre_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/genre_text"
+        android:textStyle="italic"
+        android:layout_below="@id/albumTitle_textview"/>
+
+    <TextView
+        android:id="@+id/available_formats_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/available_formats_text"
+        android:layout_below="@id/genre_textview"
+        android:paddingRight="10dp"/>
+
+    <ImageView
+        android:id="@+id/vinyl_format_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_album_black_24dp"
+        android:layout_toRightOf="@id/available_formats_textview"
+        android:layout_alignTop="@id/available_formats_textview"
+        android:paddingRight="10dp"/>
+
+    <ImageView
+        android:id="@+id/cassette_format_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_movie_black_24dp"
+        android:layout_toRightOf="@id/vinyl_format_imageview"
+        android:layout_alignTop="@id/available_formats_textview"
+        android:paddingRight="10dp"
+        />
+
+    <ImageView
+        android:id="@+id/cd_format_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_panorama_fish_eye_black_24dp"
+        android:layout_toRightOf="@id/cassette_format_imageview"
+        android:layout_alignTop="@id/available_formats_textview"/>
 
  <!-- THIS IS TESTING THE APPEARANCE OF THE DIALOG
   <LinearLayout
