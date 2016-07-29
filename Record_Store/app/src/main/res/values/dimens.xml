@@ -7,4 +7,5 @@
     <dimen name="band_name_text">30dp</dimen>
     <dimen name="album_title_text">25dp</dimen>
     <dimen name="genre_text">25dp</dimen>
+    <dimen name="price_text">25dp</dimen>
 </resources>

@@ -10,6 +10,7 @@ public class CartCustomObject {
 
     String mBandName;
     String mAlbumTitle;
+    String mGenre;
     String mFormat;
     double mPrice;
     List<CartCustomObject> cartCustomObjectList;
@@ -18,6 +19,7 @@ public class CartCustomObject {
 
         mBandName = "bandName";
         mAlbumTitle = "albumTitle";
+        mGenre = "genre";
         mFormat = "albumFormat";
         mPrice = 0.00;
         cartCustomObjectList = new LinkedList<>();

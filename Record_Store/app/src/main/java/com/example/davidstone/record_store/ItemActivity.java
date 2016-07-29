@@ -1,6 +1,7 @@
 package com.example.davidstone.record_store;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -26,7 +27,7 @@ public class ItemActivity extends AppCompatActivity {
     CartSingleton cartSingleton;
     CartRecyclerViewAdapter cartRecyclerViewAdapter;
 
-    Button mTestScreenSwitchButton;
+   // TESt BUTTON  Button mTestScreenSwitchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +37,38 @@ public class ItemActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //BELOW IS THE CODE FOR FILLING THE VIEWS WITH THE ALBUM INFO
+
+        TextView bandNameTextView = (TextView) findViewById(R.id.bandName_textview);
+        TextView albumTitleTextView = (TextView) findViewById(R.id.albumTitle_textview);
+        TextView genreTextView = (TextView) findViewById(R.id.genre_textview);
+// ADD AVAILABLE FORMATS VIEWS ANd MAKE THEM SELECTABLE IF I  CAN GET THE TEXTVIEWS TO WORK
+        TextView priceTextView = (TextView) findViewById(R.id.price_textview);
+
+        int selectedId = getIntent().getIntExtra("dbIndex",-1);
+
+        if(selectedId != -1) {
+            // use the getItem() method to get the one item we want to show, and specify it's primary key value as an argument
+            Cursor selectedItemCursor = ItemsSQLiteOpenHelper.getInstance(ItemActivity.this).getInventoryItem(selectedId);
+            selectedItemCursor.moveToFirst();
+
+            bandNameTextView.setText(selectedItemCursor.getString(selectedItemCursor.getColumnIndex(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_BAND_NAME)));
+            albumTitleTextView.setText(selectedItemCursor.getString(selectedItemCursor.getColumnIndex(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_ALBUM_TITLE)));
+            genreTextView.setText(selectedItemCursor.getString(selectedItemCursor.getColumnIndex(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_GENRE)));
+            priceTextView.setText(selectedItemCursor.getString(selectedItemCursor.getColumnIndex(String.valueOf(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_PRICE))));
+
+            selectedItemCursor.close();
+        } else {
+            bandNameTextView.setText("Error: The selected item was not found!");
+        }
+
+
+
         cartSingleton = CartSingleton.getInstance();
         cartRecyclerViewAdapter = new CartRecyclerViewAdapter(cartSingleton.cartList);
         mRecyclerView = (RecyclerView) findViewById(R.id.cart_recyclerview);
 
-        //IS THIS SUPPOSED TO BE "THIS" HERE, SINCE IT'S MEANT TO ADJUST THE CART
+        //IS THIS SUPPOSED TO BE "THIS" HERE, SINCE IT'S MEANT TO ADJUST THE CART?
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
@@ -134,21 +162,19 @@ public class ItemActivity extends AppCompatActivity {
 
 
     //THIS CODE BELOW IS TO TEST A BASIC SWITCH SCREEN BUTTON
-    mTestScreenSwitchButton=(Button)
-
-    findViewById(R.id.button3);
-
-    mTestScreenSwitchButton.setOnClickListener(new View.OnClickListener()
-
-    {
-        @Override
-        public void onClick (View view){
-        Intent intent = new Intent(view.getContext(), CartActivity.class);
-        startActivity(intent);
-    }
-    }
-
-    );
+  //  mTestScreenSwitchButton=(Button)
+//
+  //  findViewById(R.id.button3);
+//
+  //  mTestScreenSwitchButton.setOnClickListener(new View.OnClickListener() {
+  //      @Override
+  //      public void onClick (View view){
+  //      Intent intent = new Intent(view.getContext(), CartActivity.class);
+  //      startActivity(intent);
+  //  }
+  //  }
+//
+  //  );
 }
      //END TEST
 

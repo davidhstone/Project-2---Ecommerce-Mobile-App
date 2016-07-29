@@ -2,6 +2,7 @@ package com.example.davidstone.record_store;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -45,21 +46,24 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainCustomView
         final int mPosition = position;
         final CustomObjectMain customObjectMain = mCustomObjectsMainList.get(position);
      //   holder.mImageView1.setImageDrawable(customObjectMain.mAlbumIcon);
-        holder.mTextView1.setText(customObjectMain.mBandName);
-        holder.mTextView2.setText(customObjectMain.mAlbumName);
+        holder.mTextView1.setText(customObjectMain.getmBandName());
+        holder.mTextView2.setText(customObjectMain.getmAlbumTitle());
 
-        holder.mRelLayout.setOnClickListener(new View.OnClickListener() {
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intent = new Intent(view.getContext(), ItemActivity.class);
+                intent.putExtra("dbIndex",mCustomObjectsMainList.get(position).getmMainObjectID());
                 view.getContext().startActivity(intent);
 
-                Toast.makeText(view.getContext(), customObjectMain.mBandName + " " +
-                        customObjectMain.mAlbumName + " is a great choice!",
+
+                Toast.makeText(view.getContext(), customObjectMain.getmBandName() + " " +
+                        customObjectMain.getmAlbumTitle() + " is a great choice!",
                         Toast.LENGTH_SHORT).show();
 
-             // final Intent intent;
+
              // switch (position){
              //     case 0:
              //         intent = new Intent(view.getContext(), MainActivity.class);
@@ -69,8 +73,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainCustomView
              //         break;
              //     default:
              // }
-             // view.getContext().startActivity(intent);
-
+              view.getContext().startActivity(intent);
             }
         });
 

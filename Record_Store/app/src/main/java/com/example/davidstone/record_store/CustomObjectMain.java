@@ -7,23 +7,35 @@ import android.widget.ImageView;
  */
 public class CustomObjectMain {
 
-    int mAlbumIcon;
-    String mBandName;
-    String mAlbumName;
+    private int mMainObjectID;
+    private int mAlbumIcon;
+    private String mBandName;
+    private String mAlbumTitle;
+    private String mGenre;
+    private String mFormat;
+    private Double mPrice;
 
 
-    public CustomObjectMain() {
+  //public CustomObjectMain() {
 
-        mAlbumIcon = 999;
-        mBandName = "BandName 1";
-        mAlbumName = "AlbumName 1";
-    }
+  //    mAlbumIcon = 999;
+  //    mBandName = "BandName_1";
+  //    mAlbumName = "AlbumName_1";
+  //    mGenre = "Genre_1";
+  //    mFormat = "Format_1";
+  //    mPrice = 0.00;
+  //}
 
-    public CustomObjectMain(int albumIcon, String bandName, String albumName) {
+    public CustomObjectMain(int mainObjectID, int albumIcon, String bandName, String albumTitle, String genre,
+                            String format, Double price) {
 
+        mMainObjectID = mainObjectID;
         mAlbumIcon = albumIcon;
         mBandName = bandName;
-        mAlbumName = albumName;
+        mAlbumTitle = albumTitle;
+        mGenre = genre;
+        mFormat = format;
+        mPrice = price;
 
         //     this.bandName = bandName;
         //     this.albumName = albumName;
@@ -33,6 +45,16 @@ public class CustomObjectMain {
         // String bandName;
         // String albumName;
         // int color;
+
+
+    }
+
+    public int getmAlbumIcon() {
+        return mAlbumIcon;
+    }
+
+    public void setmAlbumIcon(int mAlbumIcon) {
+        this.mAlbumIcon = mAlbumIcon;
     }
 
     public String getmBandName() {
@@ -43,19 +65,43 @@ public class CustomObjectMain {
         this.mBandName = mBandName;
     }
 
-    public String getmAlbumName() {
-        return mAlbumName;
+    public String getmAlbumTitle() {
+        return mAlbumTitle;
     }
 
-    public void setmAlbumName(String mAlbumName) {
-        this.mAlbumName = mAlbumName;
+    public void setmAlbumTitle(String mAlbumTitle) {
+        this.mAlbumTitle = mAlbumTitle;
     }
 
-    public int getmAlbumIcon() {
-        return mAlbumIcon;
+    public String getmGenre() {
+        return mGenre;
     }
 
-    public void setmAlbumIcon(int mAlbumIcon) {
-        this.mAlbumIcon = mAlbumIcon;
+    public void setmGenre(String mGenre) {
+        this.mGenre = mGenre;
+    }
+
+    public String getmFormat() {
+        return mFormat;
+    }
+
+    public void setmFormat(String mFormat) {
+        this.mFormat = mFormat;
+    }
+
+    public Double getmPrice() {
+        return mPrice;
+    }
+
+    public void setmPrice(Double mPrice) {
+        this.mPrice = mPrice;
+    }
+
+    public int getmMainObjectID() {
+        return mMainObjectID;
+    }
+
+    public void setmMainObjectID(int mMainObjectID) {
+        this.mMainObjectID = mMainObjectID;
     }
 }

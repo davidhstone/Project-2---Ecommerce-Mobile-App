@@ -4,37 +4,67 @@ package com.example.davidstone.record_store;
  * Created by davidstone on 7/28/16.
  */
 public class Item {
-    private String bandName;
-    private String albumTitle;
-    private String genre;
+    private int mIcon;
+    private String mBandName;
+    private String mAlbumTitle;
+    private String mGenre;
+    private String mFormat;
+    private Double mPrice;
 
-    public Item (String bandName, String albumTitle, String genre) {
-        this.bandName = bandName;
-        this.albumTitle = albumTitle;
-        this.genre = genre;
+    public Item (int icon, String bandName, String albumTitle, String genre, String format, Double price) {
+        mIcon = 999;
+        mBandName = bandName;
+        mAlbumTitle = albumTitle;
+        mGenre = genre;
+        mFormat = format;
+        mPrice = 0.00;
     }
 
-    public String getBandName() {
-        return bandName;
+    public int getmIcon() {
+        return mIcon;
     }
 
-    public void setBandName(String bandName) {
-        this.bandName = bandName;
+    public void setmIcon(int mIcon) {
+        this.mIcon = mIcon;
     }
 
-    public String getAlbumTitle() {
-        return albumTitle;
+    public String getmBandName() {
+        return mBandName;
     }
 
-    public void setAlbumTitle(String albumTitle) {
-        this.albumTitle = albumTitle;
+    public void setmBandName(String mBandName) {
+        this.mBandName = mBandName;
     }
 
-    public String getGenre() {
-        return genre;
+    public String getmAlbumTitle() {
+        return mAlbumTitle;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setmAlbumTitle(String mAlbumTitle) {
+        this.mAlbumTitle = mAlbumTitle;
+    }
+
+    public String getmGenre() {
+        return mGenre;
+    }
+
+    public void setmGenre(String mGenre) {
+        this.mGenre = mGenre;
+    }
+
+    public String getmFormat() {
+        return mFormat;
+    }
+
+    public void setmFormat(String mFormat) {
+        this.mFormat = mFormat;
+    }
+
+    public Double getmPrice() {
+        return mPrice;
+    }
+
+    public void setmPrice(Double mPrice) {
+        this.mPrice = mPrice;
     }
 }
