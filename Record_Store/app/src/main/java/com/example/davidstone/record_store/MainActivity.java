@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         //   DON'T KNOW IF I NEED THE CODE BELOW
         //   DBAssetHelper dbSetup = new DBAssetHelper(MainActivity.this);
         //   dbSetup.getReadableDatabase();
+
+        onEmptyDatabase();
 //
         mRecyclerView = (RecyclerView) findViewById(R.id.mainrecyclerview);
 
@@ -95,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
      //   });
 
         handleIntent(getIntent());
+
+
 
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

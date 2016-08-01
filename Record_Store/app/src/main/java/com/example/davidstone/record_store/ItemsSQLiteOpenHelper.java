@@ -17,7 +17,7 @@ import java.util.List;
 public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public ItemsSQLiteOpenHelper(Context context) {
-        super(context, "db", null, 4);
+        super(context, "db", null, 5);
     }
 
  //   private static final String TAG = ItemsSQLiteOpenHelper.class.getCanonicalName();
@@ -56,9 +56,9 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
             InventoryItem.COLUMN_GENRE, InventoryItem.COLUMN_FORMAT,
             InventoryItem.COLUMN_PRICE.toString()};
 
-  // public static final String[] CART_COLUMNS = {CART.COL_ID,
-  //         CART.COLUMN_BAND_NAME, CART.COLUMN_ALBUM_TITLE,
-  //         CART.COLUMN_FORMAT, CART.COLUMN_PRICE};
+    public static final String[] CART_COLUMNS = {Cart.COL_ID,
+            Cart.COLUMN_BAND_NAME, Cart.COLUMN_ALBUM_TITLE,
+            Cart.COLUMN_FORMAT, Cart.COLUMN_PRICE.toString()};
 
     public boolean checkIfTableExists (){
         SQLiteDatabase db = getReadableDatabase();
@@ -69,10 +69,19 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
         return result;
     }
 
+    public boolean checkIfCartExists (){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(Cart.TABLE_NAME, null, null, null, null, null, null);
+        boolean result = cursor.moveToFirst();
+        cursor.close();
+
+        return result;
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ENTRIES_BASIC_INVENTORY);
-     //   db.execSQL(SQL_CREATE_ENTRIES_AVAILABLE_FORMAT);
+        db.execSQL(SQL_CREATE_ENTRIES_CART);
 
 //        insertRowItem()
 
@@ -82,7 +91,7 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DELETE_ENTRIES_BASIC_INVENTORY);
-     //   db.execSQL(SQL_DELETE_ENTRIES_AVAILABLE_FORMAT);
+        db.execSQL(SQL_DELETE_ENTRIES_CART);
         onCreate(db);
     }
 
@@ -97,14 +106,14 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
         public static final String COLUMN_PRICE = "price";
     }
 
-   // public static abstract class AvailableFormat implements BaseColumns {
-   //     public static final String TABLE_NAME = "availableFormat";
-   //     public static final String COL_ID = "_id";
-   //     public static final String COLUMN_BAND_NAME = "bandName";
-   //     public static final String COLUMN_ALBUM_TITLE = "albumTitle";
-   //     public static final String COLUMN_FORMAT = "format";
-   //     public static final String COLUMN_PRICE = "price";
-   // }
+    public static abstract class Cart implements BaseColumns {
+        public static final String TABLE_NAME = "cart";
+        public static final String COL_ID = "_id";
+        public static final String COLUMN_BAND_NAME = "bandName";
+        public static final String COLUMN_ALBUM_TITLE = "albumTitle";
+        public static final String COLUMN_FORMAT = "format";
+        public static final String COLUMN_PRICE = "price";
+    }
 
     private static final String SQL_CREATE_ENTRIES_BASIC_INVENTORY = "CREATE TABLE " +
             InventoryItem.TABLE_NAME + " (" +
@@ -119,16 +128,16 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String SQL_DELETE_ENTRIES_BASIC_INVENTORY = "DROP TABLE IF EXISTS " +
             InventoryItem.TABLE_NAME;
 
-  //  private static final String SQL_CREATE_ENTRIES_AVAILABLE_FORMAT = "CREATE TABLE " +
-  //          AvailableFormat.TABLE_NAME + " (" +
-  //          AvailableFormat._ID + " INTEGER PRIMARY KEY," +
-  //          AvailableFormat.COLUMN_BAND_NAME + " TEXT," +
-  //          AvailableFormat.COLUMN_ALBUM_TITLE + " TEXT," +
-  //          AvailableFormat.COLUMN_FORMAT + " TEXT," +
-  //          AvailableFormat.COLUMN_PRICE + " DOUBLE)";
+    private static final String SQL_CREATE_ENTRIES_CART = "CREATE TABLE " +
+            Cart.TABLE_NAME + " (" +
+            Cart._ID + " INTEGER PRIMARY KEY," +
+            Cart.COLUMN_BAND_NAME + " TEXT," +
+            Cart.COLUMN_ALBUM_TITLE + " TEXT," +
+            Cart.COLUMN_FORMAT + " TEXT," +
+            Cart.COLUMN_PRICE + " REAL)";
 
-  //  private static final String SQL_DELETE_ENTRIES_AVAILABLE_FORMAT = "DROP TABLE IF EXISTS " +
-  //          AvailableFormat.TABLE_NAME;
+    private static final String SQL_DELETE_ENTRIES_CART = "DROP TABLE IF EXISTS " +
+            Cart.TABLE_NAME;
 
     public long insertRowItem(CustomObjectMain customObjectMain) {
         SQLiteDatabase db = getWritableDatabase();
@@ -140,27 +149,26 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(InventoryItem.COLUMN_FORMAT, customObjectMain.getmFormat());
         values.put(String.valueOf(InventoryItem.COLUMN_PRICE), customObjectMain.getmPrice());
 
-        db.insertOrThrow(InventoryItem.TABLE_NAME, null, values);
+       // db.insertOrThrow(InventoryItem.TABLE_NAME, null, values);
 
         long returnItemId = db.insert(InventoryItem.TABLE_NAME, null, values);
         db.close();
         return returnItemId;
     }
 
- // public long insertRowFormat(FormatContainsPrice availableFormat) {
- //     SQLiteDatabase db = getWritableDatabase();
- //     ContentValues values = new ContentValues();
- //     values.put(AvailableFormat.COLUMN_BAND_NAME, availableFormat.getBandName());
- //     values.put(AvailableFormat.COLUMN_ALBUM_TITLE, availableFormat.getAlbumTitle());
- //     values.put(AvailableFormat.COLUMN_FORMAT, availableFormat.getFormat());
- //     values.put(AvailableFormat.COLUMN_PRICE, availableFormat.getPrice());
+    public long insertRowCart(CartCustomObject cartCustomObject) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Cart.COLUMN_BAND_NAME, cartCustomObject.getmBandName());
+        values.put(Cart.COLUMN_ALBUM_TITLE, cartCustomObject.getmAlbumTitle());
+        values.put(Cart.COLUMN_FORMAT, cartCustomObject.getmFormat());
+        values.put(Cart.COLUMN_PRICE, cartCustomObject.getmPrice());
+        db.insertOrThrow(Cart.TABLE_NAME, null, values);
 
- //     db.insertOrThrow(AvailableFormat.TABLE_NAME, null, values);
-
- //     long returnFormatId = db.insert(AvailableFormat.TABLE_NAME, null, values);
- //     db.close();
- //     return returnFormatId;
- // }
+        long returnCartId = db.insert(Cart.TABLE_NAME, null, values);
+        db.close();
+        return returnCartId;
+    }
 
  //  public Cursor getInventoryList(){
 
@@ -250,6 +258,51 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
 
         return new CustomObjectMain(mainObjectID, icon, band, album, genre,
                 format, price);
+    }
+
+    public ArrayList<CartCustomObject> cartList () {
+        ArrayList<CartCustomObject> inventoryCartList = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor2 = db.query(Cart.TABLE_NAME, null, null, null, null, null, null);
+
+        if (cursor2.moveToFirst()) {
+            //should probably do this with setters...
+            while (!cursor2.isAfterLast()) {
+                try {
+                    inventoryCartList.add(processCart(cursor2));
+                } catch (Exception e) {
+                    Log.e("DBHELPER", "getShopItems: ", e);
+                }
+
+                cursor2.moveToNext();
+            }
+        }
+
+        cursor2.close();
+        return inventoryCartList;
+    }
+
+    private CartCustomObject processCart (Cursor cursor) throws Exception {
+
+        // DON'T NEED THIS  -----> UNTIL I NEED THE SWITCH STATEMENT FOR FORMAT  ---->  CustomObjectMain albumItem;
+        int cartObjectID = cursor.getInt(cursor.getColumnIndex(String.valueOf(Cart.COL_ID)));
+        //int icon = cursor.getInt(cursor.getColumnIndex(String.valueOf(InventoryItem.COLUMN_ICON)));
+        String band = cursor.getString(cursor.getColumnIndex(Cart.COLUMN_BAND_NAME));
+        String album = cursor.getString(cursor.getColumnIndex(Cart.COLUMN_ALBUM_TITLE));
+       // String genre = cursor.getString(cursor.getColumnIndex(CART.COLUMN_GENRE));
+        String format = cursor.getString(cursor.getColumnIndex(Cart.COLUMN_FORMAT));
+        Double price = cursor.getDouble(cursor.getColumnIndex(String.valueOf(Cart.COLUMN_PRICE)));
+
+        //   TURNS OUT I DON'T THINK I NEED A SWITCH STATEMENT UNTIL I DEVELOP A NEW CUSTOM OBJECT FOR EACH FORMAT
+        //   CustomObjectMain. format;
+        //   switch(format) {
+        //       case vinyl:
+        //           format = CustomObjectMain.Format.Vinyl;
+        //           break;
+        //   }
+
+        return new CartCustomObject(cartObjectID, band, album, format, price);
     }
 
     public Cursor getInventoryItem(int id){

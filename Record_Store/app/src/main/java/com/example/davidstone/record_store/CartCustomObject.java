@@ -8,74 +8,89 @@ import java.util.List;
  */
 public class CartCustomObject {
 
-    String mBandName;
-    String mAlbumTitle;
-    String mGenre;
-    String mFormat;
-    double mPrice;
-    List<CartCustomObject> cartCustomObjectList;
+    private int mCartObjectID;
+    private String mBandName;
+    private String mAlbumTitle;
+    private String mFormat;
+    private double mPrice;
+  //  List<CartCustomObject> cartCustomObjectList;
 
-    public CartCustomObject() {
+   // public CartCustomObject() {
+//
+   //     mCartObjectID = "cartObjectID";
+   //     mBandName = "bandName";
+   //     mAlbumTitle = "albumTitle";
+   //     mFormat = "albumFormat";
+   //     mPrice = 0.00;
+   //
+   // }
 
-        mBandName = "bandName";
-        mAlbumTitle = "albumTitle";
-        mGenre = "genre";
-        mFormat = "albumFormat";
-        mPrice = 0.00;
-        cartCustomObjectList = new LinkedList<>();
+  //  public List<CartCustomObject> getCartCustomObjectList(){
+  //      return cartCustomObjectList;
+  //  }
+
+  //  public void setCartCustomObjectList(List<CartCustomObject> cartCustomObjectList) {
+  //      if (cartCustomObjectList == null) {
+  //          this.cartCustomObjectList = new LinkedList<>();
+  //      }
+  //      else {
+  //          this.cartCustomObjectList = cartCustomObjectList;
+  //      }
+  //  }
+
+   public CartCustomObject(int cartObjectID, String bandName, String albumTitle, String format, double price) {
+
+       mCartObjectID = cartObjectID;
+       mBandName = bandName;
+       mAlbumTitle = albumTitle;
+       mFormat = format;
+       mPrice = price;
+
+  //     mCartObjectID = 1;
+  //     mBandName = bandName;
+  //     mAlbumTitle = albumTitle;
+  //     mFormat = format;
+  //     mPrice = price;
+  //  //   cartCustomObjectList = new LinkedList<>();
+   }
+
+    public int getmCartObjectID() {
+        return mCartObjectID;
     }
 
-    public List<CartCustomObject> getCartCustomObjectList(){
-        return cartCustomObjectList;
+    public void setmCartObjectID(int mCartObjectID) {
+        this.mCartObjectID = mCartObjectID;
     }
 
-    public void setCartCustomObjectList(List<CartCustomObject> cartCustomObjectList) {
-        if (cartCustomObjectList == null) {
-            this.cartCustomObjectList = new LinkedList<>();
-        }
-        else {
-            this.cartCustomObjectList = cartCustomObjectList;
-        }
-    }
-
-    public CartCustomObject(String bandName, String albumTitle, String format, double price) {
-
-        mBandName = bandName;
-        mAlbumTitle = albumTitle;
-        mFormat = format;
-        mPrice = price;
-        cartCustomObjectList = new LinkedList<>();
-    }
-
-    public String getBandName() {
+    public String getmBandName() {
         return mBandName;
     }
 
-    public void setBandName(String bandName) {
-        mBandName = bandName;
+    public void setmBandName(String mBandName) {
+        this.mBandName = mBandName;
     }
 
-    public String getAlbumTitle() {
+    public String getmAlbumTitle() {
         return mAlbumTitle;
     }
 
-    public void setAlbumTitle(String albumTitle) {
-        mAlbumTitle = albumTitle;
+    public void setmAlbumTitle(String mAlbumTitle) {
+        this.mAlbumTitle = mAlbumTitle;
     }
 
-    public String getFormat() {
+    public String getmFormat() {
         return mFormat;
     }
 
-    public void setFormat(String format) {
-        mFormat = format;
+    public void setmFormat(String mFormat) {
+        this.mFormat = mFormat;
     }
 
-    public double getPrice() {
+    public double getmPrice() {
         return mPrice;
     }
 
-    public void setPrice(double price) {
-        mPrice = price;
+    public void setmPrice(double mPrice) {
+        this.mPrice = mPrice;
     }
 }

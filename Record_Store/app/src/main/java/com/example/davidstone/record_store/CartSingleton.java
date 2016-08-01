@@ -23,7 +23,7 @@ public class CartSingleton {
         prices = new LinkedList<Double>();
         cartList = new LinkedList<>();
 
-        CartCustomObject cart = new CartCustomObject("","","",0);
+        CartCustomObject cart = new CartCustomObject(0, "","","",0);
 
       //  List cartList  = new LinkedList();
       //  cartList.add(new CartCustomObject());

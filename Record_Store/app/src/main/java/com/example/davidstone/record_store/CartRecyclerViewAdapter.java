@@ -43,10 +43,10 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartCustomView
         final int myPosition = position;
 
         final CartCustomObject cartCustomObject = cartCustomObjectList.get(position);
-        holder.band.setText(cartCustomObject.getBandName());
-        holder.album.setText(cartCustomObject.getAlbumTitle());
-        holder.format.setText(cartCustomObject.getFormat());
-        holder.price.setText((int) cartCustomObject.getPrice());
+        holder.band.setText(cartCustomObject.getmBandName());
+        holder.album.setText(cartCustomObject.getmAlbumTitle());
+        holder.format.setText(cartCustomObject.getmFormat());
+        holder.price.setText((int) cartCustomObject.getmPrice());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

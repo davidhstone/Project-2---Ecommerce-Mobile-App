@@ -138,7 +138,7 @@ public class ItemActivity extends AppCompatActivity {
                             public void onClick(View view) {
 
                                 CartCustomObject newCartItem = new CartCustomObject
-                                        ("Band Name",
+                                        (0, "Band Name",
                                                 "Album Title",
                                                 "Format Type", 0);
 
