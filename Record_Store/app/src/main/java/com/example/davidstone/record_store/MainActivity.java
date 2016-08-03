@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     MainRecyclerViewAdapter mainRecyclerViewAdapter;
     CursorAdapter mCursorAdapter;
     //  Button mTestScreenSwitchButton;
+   // private AsyncTask<Void, Integer, Cursor> task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
      //           android.R.id.text1},0);
 
         //THIS CODE BELOW IS TO TEST
-
 
 
       //  List<CustomObjectMain> customObjectMainList = new ArrayList<>();
@@ -98,13 +99,9 @@ public class MainActivity extends AppCompatActivity {
 
         handleIntent(getIntent());
 
-
-
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-
-
 
 //THE CODE BELOW IS FOR THE NON-FRAGMENT RECYCLERVIEW
      //   mainRecyclerViewAdapter = new MainRecyclerViewAdapter(ItemsSQLiteOpenHelper.
@@ -152,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
         {
             ItemsSQLiteOpenHelper itemsSQLiteOpenHelper = ItemsSQLiteOpenHelper.getInstance(this);
-            itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "ACDC", "Powerage",
+            itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "AC/DC", "Powerage",
                     "Rock", "Vinyl", 15.99));
             itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Bad Brains", "ROIR Sessions",
                     "Hardcore", "Cassette", 12.99));
@@ -208,8 +205,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.shopping_cart:
-                Toast.makeText(MainActivity.this, "BASE! How low can you go? "  +
-                                "Death row! What a brotha know!"
+                Toast.makeText(MainActivity.this, "BASE! How low can you go? "
                         , Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(this, CartActivity.class);

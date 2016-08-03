@@ -87,7 +87,7 @@
         android:layout_alignTop="@id/available_formats_textview"/>
 
     <TextView
-        android:id="@id/price_textview"
+        android:id="@+id/price_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/price_text"

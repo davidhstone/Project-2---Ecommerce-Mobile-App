@@ -120,13 +120,15 @@ public class ItemActivity extends AppCompatActivity {
                 //   confirmAdd.setText("Are you sure you want to add this album to your cart?");
                 //   builder.setView(confirmAdd);
 
-                final TextView confirmAdd = new TextView(view.getContext());
-                confirmAdd.setText("Are you sure you want to add this album to your cart?");
-                builder.setView(confirmAdd);
+                final TextView formatChoose = new TextView(view.getContext());
+                formatChoose.setText("Which format do you want?");
+                builder.setView(formatChoose);
 
                 //  builder.setView(relativeLayout);
 
-                builder.setPositiveButton("Add", null);
+                //need to adjust this to a three button setup that selects betwwen vinyl, cassette, and cd
+
+                builder.setPositiveButton("Vinyl", null);
                 builder.setNegativeButton("Cancel", null);
 
                 final AlertDialog addItemDialog = builder.create();

@@ -219,7 +219,6 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         Cursor cursor = db.query(InventoryItem.TABLE_NAME, null, null, null, null, null, null);
-
         if (cursor.moveToFirst()) {
             //should probably do this with setters...
             while (!cursor.isAfterLast()) {
@@ -228,11 +227,9 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
                 } catch (Exception e) {
                     Log.e("DBHELPER", "getShopItems: ", e);
                 }
-
                 cursor.moveToNext();
             }
         }
-
         cursor.close();
         return inventoryItemList;
     }
