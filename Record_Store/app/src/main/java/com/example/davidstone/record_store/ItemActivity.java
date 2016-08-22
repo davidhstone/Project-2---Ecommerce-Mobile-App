@@ -48,19 +48,19 @@ public class ItemActivity extends AppCompatActivity {
 
         //below is to test searching along with other changes made on 8/20
 
-        if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
-            String query = getIntent().getStringExtra(SearchManager.QUERY);
-            Cursor searchCursor = ItemsSQLiteOpenHelper.getInstance(this).searchInventoryList(query);
-
-            bandNameTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_BAND_NAME)));
-            albumTitleTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_ALBUM_TITLE)));
-            genreTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_GENRE)));
-            priceTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(String.valueOf(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_PRICE))));
-
-            searchCursor.close();
-        } else {
-            bandNameTextView.setText("Error: The selected item was not found!");
-        }
+      //  if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
+      //      String query = getIntent().getStringExtra(SearchManager.QUERY);
+      //      Cursor searchCursor = ItemsSQLiteOpenHelper.getInstance(this).searchInventoryList(query);
+//
+      //      bandNameTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_BAND_NAME)));
+      //      albumTitleTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_ALBUM_TITLE)));
+      //      genreTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_GENRE)));
+      //      priceTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(String.valueOf(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_PRICE))));
+//
+      //      searchCursor.close();
+      //  } else {
+      //      bandNameTextView.setText("Error: The selected item was not found!");
+      //  }
 
 
         int selectedId = getIntent().getIntExtra("dbIndex",-1);

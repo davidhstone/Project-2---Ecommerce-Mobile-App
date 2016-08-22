@@ -353,12 +353,15 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public Cursor searchInventoryList(String query){
 
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
+
+        String selection =  InventoryItem.COLUMN_BAND_NAME + " like ? ";
+        String[] selectionArgs = {"%" + query + "%"};
 
         Cursor cursor = db.query(InventoryItem.TABLE_NAME, // a. table
                 INVENTORY_COLUMNS, // b. column names
-                InventoryItem.COLUMN_ALBUM_TITLE + " LIKE ?", // c. selections
-                new String[]{"%" + query + "%"}, // d. selections args
+                selection, // c. selections
+                selectionArgs, // d. selections args
                 //new String[]{query}, // d. selections args
                 null, // e. group by
                 null, // f. having

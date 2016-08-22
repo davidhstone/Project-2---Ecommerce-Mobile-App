@@ -20,10 +20,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -36,19 +39,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
-   // These are for AsyncTask, which is breaking the project right now
-   //ProgressBar mProgressBar;
-   //TextView mTextView;
-
     RecyclerView mRecyclerView;
     MainRecyclerViewAdapter mainRecyclerViewAdapter;
     CursorAdapter mCursorAdapter;
+    Cursor mCursor;
+
     private ItemsSQLiteOpenHelper mHelper;
 
-    private ListView mShoppingListView;
+    ArrayList mArrayList;
 
+    TextView mBandNameTextView;
 
+  //  List<CustomObjectMain> mCustomObjectsMainList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,24 +60,33 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//
+
+
+    //    mCustomObjectsMainList =  customObjectsMainList;
+
         mRecyclerView = (RecyclerView) findViewById(R.id.mainrecyclerview);
-
-
-        mHelper = ItemsSQLiteOpenHelper.getInstance(this);
-
-        Cursor cursor = ItemsSQLiteOpenHelper.getInstance(MainActivity.this).getInventoryList();
-//
-        mCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1,
-                cursor, new String[]{ItemsSQLiteOpenHelper.InventoryItem.COLUMN_BAND_NAME}, new int[]{
-                android.R.id.text1},0);
-
-
         mainRecyclerViewAdapter = new MainRecyclerViewAdapter(ItemsSQLiteOpenHelper.
                 getInstance(MainActivity.this).itemList());
         mRecyclerView.setAdapter(mainRecyclerViewAdapter);
 
+      //  mArrayList = (ArrayList) ItemsSQLiteOpenHelper.getInstance(MainActivity.this).getInventoryList();
 
+        mHelper = ItemsSQLiteOpenHelper.getInstance(this);
+
+        mCursor = ItemsSQLiteOpenHelper.getInstance(MainActivity.this).getInventoryList();
+        Log.d("cursor", mCursor.getCount()+"");
+
+        //mCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.
+        //        simple_list_item_1, mCursor, new String[]{ItemsSQLiteOpenHelper.
+        //        InventoryItem.COLUMN_BAND_NAME}, new int[]{android.R.id.text1}, 0);
+
+
+
+        //ItemsSQLiteOpenHelper.getInstance(MainActivity.this).getInventoryList().setA
+
+        //mCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1,
+        //        cursor, new String[]{ItemsSQLiteOpenHelper.InventoryItem.COLUMN_BAND_NAME}, new int[]{
+        //        android.R.id.text1}, 0);
 
 
         LinearLayoutManager linearLayoutManager =
@@ -87,43 +98,34 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void onEmptyDatabase() {
 
-    public void onEmptyDatabase () {
+        if ((ItemsSQLiteOpenHelper.getInstance(this).checkIfTableExists()) == false) {
 
-
-
-//
-            if ((ItemsSQLiteOpenHelper.getInstance(this).checkIfTableExists()) == false) {
-
-
-
-                    {
-                        ItemsSQLiteOpenHelper itemsSQLiteOpenHelper = ItemsSQLiteOpenHelper.getInstance(this);
-                        itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "AC/DC", "Powerage",
-                                "Rock", "Vinyl", 15.99));
-                        itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Bad Brains", "ROIR Sessions",
-                                "Hardcore", "Cassette", 12.99));
-                        itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Public Enemy",
-                                "It Take a Nation of Millions to Hold Us Back", "Hip Hop", "CD", 18.99));
-                        itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "The Clash", "Black Market " +
-                                "Clash", "Punk", "Vinyl", 15.99));
-                        itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "The Wailers",
-                                "Judge Not - 7-inch", "Ska", "Vinyl", 3.99));
-                        itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Void", "Faith / Void ",
-                                "Hardcore", "Vinyl", 10.99));
-                        itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "RKL", "Keep Laughing",
-                                "Skate Punk", "Vinyl", 12.99));
-                        itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "The Impressions",
-                                "The Best of The Impressions", "Soul", "Vinyl", 12.99));
-                        itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Manu Chau", "Clandestino",
-                                "World", "CD", 15.99));
-                        itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Sly & the Family Stone",
-                                "Stand", "Funk", "Vinyl", 14.99));
-                    }
-
-
+            {
+                ItemsSQLiteOpenHelper itemsSQLiteOpenHelper = ItemsSQLiteOpenHelper.getInstance(this);
+                itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "AC/DC", "Powerage",
+                        "Rock", "Vinyl", 15.99));
+                itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Bad Brains", "ROIR Sessions",
+                        "Hardcore", "Cassette", 12.99));
+                itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Public Enemy",
+                        "It Take a Nation of Millions to Hold Us Back", "Hip Hop", "CD", 18.99));
+                itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "The Clash", "Black Market " +
+                        "Clash", "Punk", "Vinyl", 15.99));
+                itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "The Wailers",
+                        "Judge Not - 7-inch", "Ska", "Vinyl", 3.99));
+                itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Void", "Faith / Void ",
+                        "Hardcore", "Vinyl", 10.99));
+                itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "RKL", "Keep Laughing",
+                        "Skate Punk", "Vinyl", 12.99));
+                itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "The Impressions",
+                        "The Best of The Impressions", "Soul", "Vinyl", 12.99));
+                itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Manu Chau", "Clandestino",
+                        "World", "CD", 15.99));
+                itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Sly & the Family Stone",
+                        "Stand", "Funk", "Vinyl", 14.99));
             }
-
+        }
     }
 
 
@@ -133,51 +135,91 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
 
-        //THIS IS SEARCH CODE BEFORE 8/21
-        //SearchManager searchManager =
-        //        (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        //MenuItem menuItem = menu.findItem(R.id.search_badge);
-        //SearchView searchView = (SearchView) menu.findItem(R.id.search_badge).
-        //        getActionView();
-        //searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
-        // Below is just holding to add if this deosn't work... looks like it goes below Searchview searchview in the lesson
-        // ComponentName componentName = new ComponentName(this,ItemActivity.class);
 
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        //MenuItem menuItem = menu.findItem(R.id.search);
-        MenuItem menuItem = menu.findItem(R.id.search_badge);
+     //   MenuItem menuItem = menu.findItem(R.id.search_badge);
         SearchView searchView = (SearchView) menu.findItem(R.id.search_badge).
                 getActionView();
-        //ComponentName componentName = new ComponentName(this,ItemActivity.class);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
-        //DONT CONTROL Z PAST THIS!!!!
 
-        MenuItemCompat.setOnActionExpandListener(menuItem,new MenuItemCompat.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem item) {
-                return true;
-            }
+     //  MenuItemCompat.setOnActionExpandListener(menuItem, new MenuItemCompat.OnActionExpandListener() {
 
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem item) {
-                Cursor cursor = mHelper.getInventoryList();
-                mCursorAdapter.changeCursor(cursor);
-                return true;
-            }
-        });
+     //      @Override
+     //      public boolean onMenuItemActionExpand(MenuItem item) {
+     //          return true;
+     //      }
 
+     //      @Override
+     //      public boolean onMenuItemActionCollapse(MenuItem item) {
+     //          Cursor cursor = mHelper.getInventoryList();
+     //          mCursorAdapter.changeCursor(cursor);
+     //          return true;
+     //      }
+     //  });
 
+     //   return super.onCreateOptionsMenu(menu);
 
-//         android.widget.SearchView searchView = (android.widget.SearchView) menu.findItem(R.id.search_badge);
-     //   ComponentName componentName = new ComponentName(this,SearchResultActivity.class);
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        return true;
+    }
 
-        return super.onCreateOptionsMenu(menu);
+    @Override
+    protected void onNewIntent(Intent intent) {
+        Log.d("MainActivity", "onNewIntent: yeah");
+    //    setIntent(intent);
+        handleIntent(intent);
 
-        //return true;
+     //   mBandNameTextView = (TextView) findViewById(R.id.bandName_textview);
+//
+     //   if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+//
+     //       String query = getIntent().getStringExtra(SearchManager.QUERY);
+     //       if(query != null){
+     //           Log.d("cursor2", query);
+     //       }
+//
+     //       mCursor = ItemsSQLiteOpenHelper.getInstance(this).searchInventoryList(query);
+     //       Log.d("cursor2", mCursor.getCount()+"");
+//
+     //       mCursorAdapter = new CursorAdapter(this, mCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER) {
+//
+     //           @Override
+     //           public View newView(Context context, Cursor cursor, ViewGroup parent) {
+     //               return LayoutInflater.from(MainActivity.this).inflate(R.layout.activity_item, parent, false);
+     //           }
+//
+     //           @Override
+     //           public void bindView(View view, Context context, Cursor cursor) {
+     //               //         ListView items = (ListView) view.findViewById(R.id.item_list_view);
+//
+     //               TextView bandNameTextView = (TextView) findViewById(R.id.bandName_textview);
+     //               TextView albumTitleTextView = (TextView) findViewById(R.id.albumTitle_textview);
+     //               TextView genreTextView = (TextView) findViewById(R.id.genre_textview);
+//
+     //               // ADD AVAILABLE FORMATS VIEWS ANd MAKE THEM SELECTABLE IF I  CAN GET THE TEXTVIEWS TO WORK
+     //               TextView priceTextView = (TextView) findViewById(R.id.price_textview);
+//
+     //               bandNameTextView.setText(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_BAND_NAME);
+//
+     //          //     Intent intent = new Intent(view.getContext(), ItemActivity.class);
+     //         //      intent.putExtra("dbIndex",customObjectsMainList.get(position).getmMainObjectID());
+     //         //      view.getContext().startActivity(intent);
+//
+//
+     //              // Toast.makeText(view.getContext(), customObjectMain.getmBandName() + " " +
+     //              //                 customObjectMain.getmAlbumTitle() + " is a great choice!",
+     //              //         Toast.LENGTH_SHORT).show();
+//
+     //         //      view.getContext().startActivity(intent);
+//
+     //           }
+     //       };
+//
+     //       //mCursorAdapter.changeCursor(mCursor);
+//
+     //    //   mListView.setAdapter(mCursorAdapter);
+     //   }
     }
 
     @Override
@@ -205,16 +247,10 @@ public class MainActivity extends AppCompatActivity {
 
             default:
 
-               // return super.onOptionsItemSelected(item);
                 return true;
         }
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        setIntent(intent);
-        handleIntent(intent);
-    }
 
     private void handleIntent(Intent intent) {
 
@@ -222,11 +258,8 @@ public class MainActivity extends AppCompatActivity {
             String query = intent.getStringExtra(SearchManager.QUERY);
             //Cursor cursor = ItemsSQLiteOpenHelper.getInstance(MainActivity.this).searchInventoryList(query);
             Cursor cursor = mHelper.searchInventoryList(query);
-            mCursorAdapter.changeCursor(cursor);
+          //  mCursorAdapter.changeCursor(cursor);
 
         }
     }
-
-
-
 }
