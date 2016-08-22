@@ -57,36 +57,6 @@ public class CartActivity extends AppCompatActivity {
                 getInstance(CartActivity.this).cartList());
         mRecyclerView.setAdapter(cartRecyclerViewAdapter);
 
-        /*
-        public void onEmptyCart () {
-
-        if ((ItemsSQLiteOpenHelper.getInstance(this).checkIfCartExists()) == false)
-
-        {
-            ItemsSQLiteOpenHelper itemsSQLiteOpenHelper = ItemsSQLiteOpenHelper.getInstance(this);
-            itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "AC/DC", "Powerage",
-                    "Rock", "Vinyl", 15.99));
-            itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Bad Brains", "ROIR Sessions",
-                    "Hardcore", "Cassette", 12.99));
-            itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Public Enemy",
-                    "It Take a Nation of Millions to Hold Us Back", "Hip Hop", "CD", 18.99));
-            itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "The Clash", "Black Market " +
-                    "Clash", "Punk", "Vinyl", 15.99));
-            itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "The Wailers",
-                    "Judge Not - 7-inch", "Ska", "Vinyl", 3.99));
-            itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Void", "Faith / Void ",
-                    "Hardcore", "Vinyl", 10.99));
-            itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "RKL", "Keep Laughing",
-                    "Skate Punk", "Vinyl", 12.99));
-            itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "The Impressions",
-                    "The Best of The Impressions", "Soul", "Vinyl", 12.99));
-            itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Manu Chau", "Clandestino",
-                    "World", "CD", 15.99));
-            itemsSQLiteOpenHelper.insertRowItem(new CustomObjectMain(1, 999, "Sly & the Family Stone",
-                    "Stand", "Funk", "Vinyl", 14.99));
-        }
-    }
-         */
 
     }
 

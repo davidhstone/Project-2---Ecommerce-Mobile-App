@@ -16,15 +16,7 @@ public class CustomObjectMain {
     private Double mPrice;
 
 
-  //public CustomObjectMain() {
 
-  //    mAlbumIcon = 999;
-  //    mBandName = "BandName_1";
-  //    mAlbumName = "AlbumName_1";
-  //    mGenre = "Genre_1";
-  //    mFormat = "Format_1";
-  //    mPrice = 0.00;
-  //}
 
     public CustomObjectMain(int mainObjectID, int albumIcon, String bandName, String albumTitle, String genre,
                             String format, Double price) {
@@ -37,14 +29,6 @@ public class CustomObjectMain {
         mFormat = format;
         mPrice = price;
 
-        //     this.bandName = bandName;
-        //     this.albumName = albumName;
-        //     this.color = color;
-        // }
-//
-        // String bandName;
-        // String albumName;
-        // int color;
 
 
     }

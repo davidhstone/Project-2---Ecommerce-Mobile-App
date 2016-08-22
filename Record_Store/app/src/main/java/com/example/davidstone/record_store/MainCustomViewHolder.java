@@ -22,19 +22,18 @@ public class MainCustomViewHolder extends RecyclerView.ViewHolder {
     public TextView mTextView3;
     public RelativeLayout mRelLayout;
 
- //   private final Context context;
+
 
     public MainCustomViewHolder(View itemView) {
         super(itemView);
-   //     context = itemView.getContext();
+
 
         mImageView1 = (ImageView) itemView.findViewById(R.id.album_icon);
         mTextView1 = (TextView) itemView.findViewById(R.id.textview_1);
         mTextView2 = (TextView) itemView.findViewById(R.id.textview_2);
         mTextView3 = (TextView) itemView.findViewById(R.id.textview_3);
         mRelLayout = (RelativeLayout) itemView.findViewById(R.id.item_view);
-      //  itemView.setClickable(true);
-      //  itemView.setOnClickListener((View.OnClickListener) this);
+
     }
 
 }

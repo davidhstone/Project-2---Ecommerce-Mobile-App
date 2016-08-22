@@ -20,7 +20,7 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
         super(context, "db", null, 5);
     }
 
- //   private static final String TAG = ItemsSQLiteOpenHelper.class.getCanonicalName();
+    private static final String TAG = ItemsSQLiteOpenHelper.class.getCanonicalName();
 
  //   private static final int DATABASE_VERSION = 1;
  //   public static final String DATABASE_NAME = "INVENTORY_DB";
@@ -163,7 +163,8 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(Cart.COLUMN_ALBUM_TITLE, cartCustomObject.getmAlbumTitle());
         values.put(Cart.COLUMN_FORMAT, cartCustomObject.getmFormat());
         values.put(Cart.COLUMN_PRICE, cartCustomObject.getmPrice());
-        db.insertOrThrow(Cart.TABLE_NAME, null, values);
+
+        //db.insertOrThrow(Cart.TABLE_NAME, null, values);
 
         long returnCartId = db.insert(Cart.TABLE_NAME, null, values);
         db.close();
@@ -213,7 +214,7 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
  //          SQLiteDatabase db = this.getReadableDatabase();
  //      }
  //  }
-    // PASS THESE PARAMETERS INTO itemList to do the case switch selcetion stuff (String extraSelection, String[] newArg)
+    // PASS THESE PARAMETERS INTO itemList to do the case switch selection stuff (String extraSelection, String[] newArg)
     public ArrayList<CustomObjectMain> itemList () {
         ArrayList<CustomObjectMain> inventoryItemList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -302,6 +303,22 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
         return new CartCustomObject(cartObjectID, band, album, format, price);
     }
 
+    public Cursor getInventoryList(){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(InventoryItem.TABLE_NAME, // a. table
+                INVENTORY_COLUMNS, // b. column names
+                null, // c. selections
+                null, // d. selections args
+                null, // e. group by
+                null, // f. having
+                null, // g. order by
+                null); // h. limit
+
+        return cursor;
+    }
+
     public Cursor getInventoryItem(int id){
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -335,12 +352,14 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
    // }
 
     public Cursor searchInventoryList(String query){
+
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(InventoryItem.TABLE_NAME, // a. table
                 INVENTORY_COLUMNS, // b. column names
                 InventoryItem.COLUMN_ALBUM_TITLE + " LIKE ?", // c. selections
                 new String[]{"%" + query + "%"}, // d. selections args
+                //new String[]{query}, // d. selections args
                 null, // e. group by
                 null, // f. having
                 null, // g. order by

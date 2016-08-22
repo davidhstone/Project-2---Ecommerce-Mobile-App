@@ -2,7 +2,7 @@
     <string name="app_name">Undercurrent WebStore</string>
     <string name="action_settings">Word Up</string>
     <string name="search_hint">Whatchoo Want?</string>
-    <string name="cart_title_string">This your cart</string>
+    <string name="cart_title_string">This is your cart</string>
     <string name="title_activity_item">Full Album Info</string>
     <string name="title_activity_cart">Shopping Cart</string>
     <string name="click_info_text">click for full album info</string>

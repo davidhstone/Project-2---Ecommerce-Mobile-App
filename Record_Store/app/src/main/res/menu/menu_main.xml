@@ -10,11 +10,10 @@
         app:showAsAction="never" />    -->
     <item
         android:id="@+id/search_badge"
+        android:title="Search"
         android:icon="@drawable/ic_search_black_24dp"
         app:showAsAction="collapseActionView|ifRoom"
-        android:actionViewClass="android.support.v7.widget.SearchView"
         app:actionViewClass="android.support.v7.widget.SearchView"
-        android:title="Search"
         />
 
     <item

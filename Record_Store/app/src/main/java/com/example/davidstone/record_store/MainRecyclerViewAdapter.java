@@ -63,16 +63,6 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainCustomView
                         customObjectMain.getmAlbumTitle() + " is a great choice!",
                         Toast.LENGTH_SHORT).show();
 
-
-             // switch (position){
-             //     case 0:
-             //         intent = new Intent(view.getContext(), MainActivity.class);
-             //         break;
-             //     case 1:
-             //         intent = new Intent(view.getContext(), ItemActivity.class);
-             //         break;
-             //     default:
-             // }
               view.getContext().startActivity(intent);
             }
         });

@@ -1,5 +1,6 @@
 package com.example.davidstone.record_store;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -22,12 +23,11 @@ import android.widget.Toast;
 
 public class ItemActivity extends AppCompatActivity {
 
-    //WHAT DO I NEED TO DECLARE HERE, THIS SCREEN WON'T BE A RECYCLERVIEW
+    //WHAT DO I NEED TO DECLARE HERE? THIS SCREEN WON'T BE A RECYCLERVIEW
     RecyclerView mRecyclerView;
     CartSingleton cartSingleton;
     CartRecyclerViewAdapter cartRecyclerViewAdapter;
 
-   // TESt BUTTON  Button mTestScreenSwitchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +42,31 @@ public class ItemActivity extends AppCompatActivity {
         TextView bandNameTextView = (TextView) findViewById(R.id.bandName_textview);
         TextView albumTitleTextView = (TextView) findViewById(R.id.albumTitle_textview);
         TextView genreTextView = (TextView) findViewById(R.id.genre_textview);
+
 // ADD AVAILABLE FORMATS VIEWS ANd MAKE THEM SELECTABLE IF I  CAN GET THE TEXTVIEWS TO WORK
         TextView priceTextView = (TextView) findViewById(R.id.price_textview);
+
+        //below is to test searching along with other changes made on 8/20
+
+        if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
+            String query = getIntent().getStringExtra(SearchManager.QUERY);
+            Cursor searchCursor = ItemsSQLiteOpenHelper.getInstance(this).searchInventoryList(query);
+
+            bandNameTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_BAND_NAME)));
+            albumTitleTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_ALBUM_TITLE)));
+            genreTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_GENRE)));
+            priceTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(String.valueOf(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_PRICE))));
+
+            searchCursor.close();
+        } else {
+            bandNameTextView.setText("Error: The selected item was not found!");
+        }
+
 
         int selectedId = getIntent().getIntExtra("dbIndex",-1);
 
         if(selectedId != -1) {
-            // use the getItem() method to get the one item we want to show, and specify it's primary key value as an argument
+            // use the getItem() method to get the one item we want to show, and specify its primary key value as an argument
             Cursor selectedItemCursor = ItemsSQLiteOpenHelper.getInstance(ItemActivity.this).getInventoryItem(selectedId);
             selectedItemCursor.moveToFirst();
 
@@ -91,8 +109,7 @@ public class ItemActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                //   Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //           .setAction("Action", null).show();
+
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
@@ -126,7 +143,7 @@ public class ItemActivity extends AppCompatActivity {
 
                 //  builder.setView(relativeLayout);
 
-                //need to adjust this to a three button setup that selects betwwen vinyl, cassette, and cd
+                //need to adjust this to a three button setup that selects betwween vinyl, cassette, and cd
 
                 builder.setPositiveButton("Vinyl", null);
                 builder.setNegativeButton("Cancel", null);
@@ -163,22 +180,8 @@ public class ItemActivity extends AppCompatActivity {
         });
 
 
-    //THIS CODE BELOW IS TO TEST A BASIC SWITCH SCREEN BUTTON
-  //  mTestScreenSwitchButton=(Button)
-//
-  //  findViewById(R.id.button3);
-//
-  //  mTestScreenSwitchButton.setOnClickListener(new View.OnClickListener() {
-  //      @Override
-  //      public void onClick (View view){
-  //      Intent intent = new Intent(view.getContext(), CartActivity.class);
-  //      startActivity(intent);
-  //  }
-  //  }
-//
-  //  );
 }
-     //END TEST
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
