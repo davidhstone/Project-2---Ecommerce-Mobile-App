@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final String TAG = "MainActivity";
     RecyclerView mRecyclerView;
     MainRecyclerViewAdapter mainRecyclerViewAdapter;
     CursorAdapter mCursorAdapter;
@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     //    mCustomObjectsMainList =  customObjectsMainList;
-
+        mArrayList = ItemsSQLiteOpenHelper.
+            getInstance(MainActivity.this).itemList();
         mRecyclerView = (RecyclerView) findViewById(R.id.mainrecyclerview);
-        mainRecyclerViewAdapter = new MainRecyclerViewAdapter(ItemsSQLiteOpenHelper.
-                getInstance(MainActivity.this).itemList());
+        mainRecyclerViewAdapter = new MainRecyclerViewAdapter(mArrayList);
         mRecyclerView.setAdapter(mainRecyclerViewAdapter);
 
       //  mArrayList = (ArrayList) ItemsSQLiteOpenHelper.getInstance(MainActivity.this).getInventoryList();
@@ -254,12 +254,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void handleIntent(Intent intent) {
 
+      // mArrayList = ItemsSQLiteOpenHelper.
+      //         getInstance(MainActivity.this).itemList();
+
+        Log.d(TAG, "handleIntent: action: "+intent.getAction());
+
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            //Cursor cursor = ItemsSQLiteOpenHelper.getInstance(MainActivity.this).searchInventoryList(query);
-            Cursor cursor = mHelper.searchInventoryList(query);
-          //  mCursorAdapter.changeCursor(cursor);
+            Log.d(TAG, "handleIntent: Query: "+query);
+            mArrayList.clear();
+            mArrayList.addAll(ItemsSQLiteOpenHelper.getInstance(MainActivity.this).searchInventoryList(query));
+            Log.d(TAG, "handleIntent: result size: "+mArrayList.size());
+          //  mCursor = ItemsSQLiteOpenHelper.getInstance(MainActivity.this).getInventoryList();
 
+            mainRecyclerViewAdapter.notifyDataSetChanged();
         }
     }
 }

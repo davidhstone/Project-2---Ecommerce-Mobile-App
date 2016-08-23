@@ -351,24 +351,38 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
    //     return cursor;
    // }
 
-    public Cursor searchInventoryList(String query){
+    public ArrayList<CustomObjectMain> searchInventoryList(String query){
 
+        ArrayList<CustomObjectMain> searchList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
         String selection =  InventoryItem.COLUMN_BAND_NAME + " like ? ";
         String[] selectionArgs = {"%" + query + "%"};
 
-        Cursor cursor = db.query(InventoryItem.TABLE_NAME, // a. table
-                INVENTORY_COLUMNS, // b. column names
-                selection, // c. selections
-                selectionArgs, // d. selections args
-                //new String[]{query}, // d. selections args
-                null, // e. group by
-                null, // f. having
-                null, // g. order by
-                null); // h. limit
+       Cursor cursor = db.query(InventoryItem.TABLE_NAME, // a. table
+               INVENTORY_COLUMNS, // b. column names
+               selection, // c. selections
+               selectionArgs, // d. selections args
+               //new String[]{query}, // d. selections args
+               null, // e. group by
+               null, // f. having
+               null, // g. order by
+               null); // h. limit
 
-        return cursor;
+       if (cursor.moveToFirst()) {
+           //should probably do this with setters...
+           while (!cursor.isAfterLast()) {
+               try {
+                   searchList.add(processItem(cursor));
+               } catch (Exception e) {
+                   Log.e("DBHELPER", "getShopItems: ", e);
+               }
+               cursor.moveToNext();
+           }
+       }
+
+        cursor.close();
+        return searchList;
     }
 
 }
