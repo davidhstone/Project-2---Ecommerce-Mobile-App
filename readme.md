@@ -1,8 +1,14 @@
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project #2: Mobile Commerce App
 
+<<<<<<< HEAD
 MainActivity Screenshot:
 
 Undercurrent-Webstore-MainActivity.png
+=======
+MainActivity Screenshot
+
+
+>>>>>>> 2e59b85ccdbc37cf9d4e79a430f9fb35c86ab61f
 
 BUGS:
 
