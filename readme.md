@@ -5,8 +5,7 @@ MainActivity Screenshot:
 
 Undercurrent-Webstore-MainActivity.png
 =======
-MainActivity Screenshot
-
+MainActivity Screenshot is in the screenshots folder, at this location:
 
 Project-2---Ecommerce-Mobile-App/screenshots/Undercurrent-Webstore-MainActivity.png
 
