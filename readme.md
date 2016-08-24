@@ -1,5 +1,19 @@
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project #2: Mobile Commerce App
 
+MainActivity Screenshot:
+
+Undercurrent-Webstore-MainActivity.png
+
+BUGS:
+
+1 - Seems like the app needs to be closed and reopened for the inventory to show up on the main screen after intial installation
+
+2 - Closing search doesn't reset the inventory list on the main screen, although you can rerun the search
+
+3 - Cart isn't adding stuff right anymore. It's giving the views but not populating the album info... tried to fix that tonight, 8/23, and ran around in circles for hours. 
+
+4 - not really a bug, but after I get all the functionality I want, I need to spruce it up a bit and make it look pretty
+
 - TEST CASES AT BOTTOM OF PAGE - 
 
 #### Overview
@@ -31,7 +45,7 @@ PROJECT 2 - RECORD STORE - TEST CASES:
 	a) Upon submitting a search request, if the item(s) exist(s) in the database, the results will display on a seaperate page
 		User Story: as a user, when I search for an item(s) in stock, the results are displayed in a seperate page
 
-2 - Add to Cart Test Case  - the feature is implemented if the following conditions are true:
+3 - Add to Cart Test Case  - the feature is implemented if the following conditions are true:
 	a) the user can click a "add to cart" icon next to an item
 		User Story: as a user, I can click the add to cart icon
 	b) the cart shows that the item has been added when the user clicks the "add to cart" icon
@@ -39,7 +53,7 @@ PROJECT 2 - RECORD STORE - TEST CASES:
 	c) the cart displays a running total for price of items added, when an item is added to the cart
 		User Story: as a user, I can see that the cart displays the running total for the price of the items in the cart 
 
-3 - Remove from Cart T.C.  - the feature is implemented if the following conditions are true:
+4 - Remove from Cart T.C.  - the feature is implemented if the following conditions are true:
 	a) the user can click a "remove item" button next to item in the cart
 		User Story: as a user, I can click a remove item button which is next to each item in the cart
 	b) the item is removed from the cart when the "remove item" button is clicked
@@ -47,7 +61,7 @@ PROJECT 2 - RECORD STORE - TEST CASES:
 	c) the price is decremented when the item is removed from the cart, and the cart displays the new total
 		User Story: as a user, I see that the price has been decremented when I remove an item, by the price of that item
 
-4 - Modify Cart Items T.C.  - the feature is implemented if the following conditions are true:
+5 - Modify Cart Items T.C.  - the feature is implemented if the following conditions are true:
 	a) the cart displays a "modify selection" button next to each item in the cart
 		User Story: as a user, I can see a modify selcetion button next to each item in the cart
 	b) a dialog appears when the "modify selection" button is clicked, which asks for a format preference, or used or new
@@ -59,7 +73,7 @@ PROJECT 2 - RECORD STORE - TEST CASES:
 	d) the dialog disappears when cancel is clicked
 		User Story: as a user, I can click cancel and the dialog disappears
 
-5 - Cart Always Accessible T.C.  - the feature is implemented if the following conditions are true:
+6 - Cart Always Accessible T.C.  - the feature is implemented if the following conditions are true:
 	a) the cart is always accessible from every screen in the app
 		User Story: As a user, I can access the cart from every screen in the app
 
