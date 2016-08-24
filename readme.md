@@ -8,7 +8,7 @@ Undercurrent-Webstore-MainActivity.png
 MainActivity Screenshot
 
 
->>>>>>> 2e59b85ccdbc37cf9d4e79a430f9fb35c86ab61f
+Project-2---Ecommerce-Mobile-App/screenshots/Undercurrent-Webstore-MainActivity.png
 
 BUGS:
 
