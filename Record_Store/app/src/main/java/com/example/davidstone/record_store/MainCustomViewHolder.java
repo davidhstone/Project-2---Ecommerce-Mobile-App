@@ -16,6 +16,8 @@ import org.w3c.dom.Text;
  */
 public class MainCustomViewHolder extends RecyclerView.ViewHolder {
 
+
+
     public ImageView mImageView1;
     public TextView mTextView1;
     public TextView mTextView2;

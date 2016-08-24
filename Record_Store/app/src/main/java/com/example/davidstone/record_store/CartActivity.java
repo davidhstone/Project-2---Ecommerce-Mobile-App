@@ -48,12 +48,6 @@ public class CartActivity extends AppCompatActivity {
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
-        //NEED REFERENCE TO THE CART LIST
-
-      //  mainRecyclerViewAdapter = new MainRecyclerViewAdapter(customObjectMainList);
-      //  mRecyclerView.setAdapter(mainRecyclerViewAdapter);
-
-      //  List<CartCustomObject> cartCustomObjectList = new ArrayList<>();
 
         cartRecyclerViewAdapter = new CartRecyclerViewAdapter(ItemsSQLiteOpenHelper.
                 getInstance(CartActivity.this).cartList());
@@ -63,6 +57,8 @@ public class CartActivity extends AppCompatActivity {
     }
 
     public void onEmptyCart () {
+
+        //THIS METHOD IS HERE TO MAKE SURE I CAN SEE ALBUMS IN THE CART, WILL BE COMMENTED OUT LATER
 
         if ((ItemsSQLiteOpenHelper.getInstance(this).checkIfCartExists()) == false)
 
@@ -80,7 +76,7 @@ public class CartActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);

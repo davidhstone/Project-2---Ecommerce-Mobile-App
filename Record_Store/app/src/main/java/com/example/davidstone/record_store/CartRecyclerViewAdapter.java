@@ -21,9 +21,6 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartCustomView
 
 
     public CartRecyclerViewAdapter(final List<CartCustomObject> cartCustomObjectsList) {
-      //  if (cartCustomObjects == null)
-      //      cartCustomObjectList = new LinkedList<>();
-      //  else
 
             mCartCustomObjectsList = cartCustomObjectsList;
     }
@@ -46,6 +43,9 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartCustomView
         holder.mBand.setText(cartCustomObject.getmBandName());
         holder.mAlbum.setText(cartCustomObject.getmAlbumTitle());
         holder.mFormat.setText(cartCustomObject.getmFormat());
+
+        //ALL THIS COMMENTED OUT CODE BELOW WILL BE MODIFIED IN ORDER TO BE ABLE TO ADJUST THE CART CONTENTS LATER
+
 //        holder.mPrice.setText((int) cartCustomObject.getmPrice());
 
       //  holder.itemView.setOnClickListener(new View.OnClickListener() {

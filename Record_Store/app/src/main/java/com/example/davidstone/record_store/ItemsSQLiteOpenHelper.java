@@ -16,29 +16,13 @@ import java.util.List;
  */
 public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
 
+    //THE DATABASE SETUP IS IN HERE, THERE ARE A COUPLE EXTRA METHODS HERE THAT I"M KEEPING BECAUSE I MIGHT USE THEM LATER
+
     public ItemsSQLiteOpenHelper(Context context) {
         super(context, "db", null, 5);
     }
 
     private static final String TAG = ItemsSQLiteOpenHelper.class.getCanonicalName();
-
- //   private static final int DATABASE_VERSION = 1;
- //   public static final String DATABASE_NAME = "INVENTORY_DB";
- //   public static final String BASIC_INVENTORY_TABLE_NAME = "BASIC_INVENTORY";
- //   public static final String AVAILABLE_FORMATS_TABLE_NAME = "AVAILABLE_FORMATS";
-
- //   public static final String INVENTORY_COL_ID = "_id";
- //   public static final String INVENTORY_COL_BAND_NAME = "BAND_NAME";
- //   public static final String INVENTORY_COL_ALBUM_TITLE = "ALBUM_TITLE";
- //   public static final String INVENTORY_COL_GENRE = "GENRE";
-//
- //   public static final String FORMAT_COL_ID = "_id";
- //   public static final String FORMAT_COL_BAND_NAME = "BAND_NAME";
- //   public static final String FORMAT_COL_ALBUM_TITLE = "ALBUM_TITLE";
- //   public static final String FORMAT_COL_FORMAT = "FORMAT";
- //   public static final String FORMAT_COL_PRICE = "PRICE";
-
-
 
 
     private static ItemsSQLiteOpenHelper INSTANCE;
@@ -49,7 +33,7 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
         return INSTANCE;
     }
 
-    //BELOW IS A TEST TO SEE IF I CAN GET THe DETAIL VIEW WORKING
+
     public static final String[] INVENTORY_COLUMNS = {InventoryItem.COLUMN_ID,
             String.valueOf(InventoryItem.COLUMN_ICON),
             InventoryItem.COLUMN_BAND_NAME, InventoryItem.COLUMN_ALBUM_TITLE,
@@ -171,49 +155,7 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
         return returnCartId;
     }
 
- //  public Cursor getInventoryList(){
 
- //      ArrayList<CustomObjectMain> itemsList = new ArrayList<>();
-
- //      itemsList.add(new CustomObjectMain(R.color.colorAccent,
- //              "AC/DC", "PowerAge"));
-
- //      SQLiteDatabase db = getWritableDatabase();
-
- //      Cursor cursor = db.query(InventoryItem.TABLE_NAME, // a. table
- //              INVENTORY_COLUMNS, // b. column names
- //              null, // c. selections
- //              null, // d. selections args
- //              null, // e. group by
- //              null, // f. having
- //              null, // g. order by
- //              null); // h. limit
-
- //          public ArrayList<CustomObjectMain> itemList (String extraSelection, String[] newArg){
- //          ArrayList<CustomObjectMain> itemList = new ArrayList<>();
- //          SQLiteDatabase db = getReadableDatabase();
-
- //          Cursor cursor = db.query(InventoryItem.TABLE_NAME, null, extraSelection, newArg, null, null, null);
-
- //          if (cursor.moveToFirst()) {
- //              //should probably do this with setters...
- //              while (!cursor.isAfterLast()) {
- //                  try {
- //                      itemList.add(insertRowItem(cursor));
- //                  } catch (Exception e) {
- //                      Log.e("DBHELPER", "getShopItems: ", e);
- //                  }
-
- //                  cursor.moveToNext();
- //              }
- //          }
-
- //          cursor.close();
- //          return itemList;
-
- //          SQLiteDatabase db = this.getReadableDatabase();
- //      }
- //  }
     // PASS THESE PARAMETERS INTO itemList to do the case switch selection stuff (String extraSelection, String[] newArg)
     public ArrayList<CustomObjectMain> itemList () {
         ArrayList<CustomObjectMain> inventoryItemList = new ArrayList<>();
@@ -237,7 +179,7 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private CustomObjectMain processItem (Cursor cursor) throws Exception {
 
-    // DON'T NEED THIS  -----> UNTIL I NEED THE SWITCH STATEMENT FOR FORMAT  ---->  CustomObjectMain albumItem;
+
         int mainObjectID = cursor.getInt(cursor.getColumnIndex(String.valueOf(InventoryItem.COLUMN_ID)));
         int icon = cursor.getInt(cursor.getColumnIndex(String.valueOf(InventoryItem.COLUMN_ICON)));
         String band = cursor.getString(cursor.getColumnIndex(InventoryItem.COLUMN_BAND_NAME));
@@ -246,13 +188,6 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
         String format = cursor.getString(cursor.getColumnIndex(InventoryItem.COLUMN_FORMAT));
         Double price = cursor.getDouble(cursor.getColumnIndex(String.valueOf(InventoryItem.COLUMN_PRICE)));
 
-     //   TURNS OUT I DON'T THINK I NEED A SWITCH STATEMENT UNTIL I DEVELOP A NEW CUSTOM OBJECT FOR EACH FORMAT
-     //   CustomObjectMain. format;
-     //   switch(format) {
-     //       case vinyl:
-     //           format = CustomObjectMain.Format.Vinyl;
-     //           break;
-     //   }
 
         return new CustomObjectMain(mainObjectID, icon, band, album, genre,
                 format, price);
@@ -265,7 +200,7 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
         Cursor cursor2 = db.query(Cart.TABLE_NAME, null, null, null, null, null, null);
 
         if (cursor2.moveToFirst()) {
-            //should probably do this with setters...
+
             while (!cursor2.isAfterLast()) {
                 try {
                     inventoryCartList.add(processCart(cursor2));
@@ -283,22 +218,13 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private CartCustomObject processCart (Cursor cursor) throws Exception {
 
-        // DON'T NEED THIS  -----> UNTIL I NEED THE SWITCH STATEMENT FOR FORMAT  ---->  CustomObjectMain albumItem;
+
         int cartObjectID = cursor.getInt(cursor.getColumnIndex(String.valueOf(Cart.COL_ID)));
-        //int icon = cursor.getInt(cursor.getColumnIndex(String.valueOf(InventoryItem.COLUMN_ICON)));
         String band = cursor.getString(cursor.getColumnIndex(Cart.COLUMN_BAND_NAME));
         String album = cursor.getString(cursor.getColumnIndex(Cart.COLUMN_ALBUM_TITLE));
-       // String genre = cursor.getString(cursor.getColumnIndex(CART.COLUMN_GENRE));
         String format = cursor.getString(cursor.getColumnIndex(Cart.COLUMN_FORMAT));
         Double price = cursor.getDouble(cursor.getColumnIndex(String.valueOf(Cart.COLUMN_PRICE)));
 
-        //   TURNS OUT I DON'T THINK I NEED A SWITCH STATEMENT UNTIL I DEVELOP A NEW CUSTOM OBJECT FOR EACH FORMAT
-        //   CustomObjectMain. format;
-        //   switch(format) {
-        //       case vinyl:
-        //           format = CustomObjectMain.Format.Vinyl;
-        //           break;
-        //   }
 
         return new CartCustomObject(cartObjectID, band, album, format, price);
     }
@@ -335,21 +261,6 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-   // public Cursor getFormatItem(){
-//
-   //     SQLiteDatabase db = this.getReadableDatabase();
-//
-   //     Cursor cursor = db.query(AvailableFormat.TABLE_NAME, // a. table
-   //             FORMAT_COLUMNS, // b. column names
-   //             null, // c. selections
-   //             null, // d. selections args
-   //             null, // e. group by
-   //             null, // f. having
-   //             null, // g. order by
-   //             null); // h. limit
-//
-   //     return cursor;
-   // }
 
     public ArrayList<CustomObjectMain> searchInventoryList(String query){
 
@@ -370,7 +281,6 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
                null); // h. limit
 
        if (cursor.moveToFirst()) {
-           //should probably do this with setters...
            while (!cursor.isAfterLast()) {
                try {
                    searchList.add(processItem(cursor));

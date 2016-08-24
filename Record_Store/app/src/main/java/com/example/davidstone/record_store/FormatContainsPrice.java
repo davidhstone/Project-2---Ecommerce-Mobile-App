@@ -4,6 +4,9 @@ package com.example.davidstone.record_store;
  * Created by davidstone on 7/28/16.
  */
 public class FormatContainsPrice {
+
+    //ONLY KEEPING THIS CLASS HERE BECAUSE I MIGHT USE IT LATER
+
     private String bandName;
     private String albumTitle;
     private String format;

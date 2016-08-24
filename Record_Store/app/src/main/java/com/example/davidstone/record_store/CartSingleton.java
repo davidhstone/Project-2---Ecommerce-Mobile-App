@@ -8,6 +8,8 @@ import java.util.List;
  */
 public class CartSingleton {
 
+    //THIS STORES THE CART
+
     private static CartSingleton cartSingleton = null;
 
     private static List<String> bandNames;
@@ -25,10 +27,6 @@ public class CartSingleton {
 
         CartCustomObject cart = new CartCustomObject(0, "","","",0);
 
-      //  List cartList  = new LinkedList();
-      //  cartList.add(new CartCustomObject());
-
-      //  cart.setCartCustomObjectList(cartList);
     }
 
     public static CartSingleton getInstance() {

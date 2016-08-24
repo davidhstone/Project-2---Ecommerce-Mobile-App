@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 public class ItemActivity extends AppCompatActivity {
 
-    //WHAT DO I NEED TO DECLARE HERE? THIS SCREEN WON'T BE A RECYCLERVIEW
+
     RecyclerView mRecyclerView;
     CartSingleton cartSingleton;
     CartRecyclerViewAdapter cartRecyclerViewAdapter;
@@ -37,31 +37,14 @@ public class ItemActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //BELOW IS THE CODE FOR FILLING THE VIEWS WITH THE ALBUM INFO
+        //BELOW IS THE CODE FOR PREPARING THE VIEWS WITH THE ALBUM INFO
 
         TextView bandNameTextView = (TextView) findViewById(R.id.bandName_textview);
         TextView albumTitleTextView = (TextView) findViewById(R.id.albumTitle_textview);
         TextView genreTextView = (TextView) findViewById(R.id.genre_textview);
-
-// ADD AVAILABLE FORMATS VIEWS ANd MAKE THEM SELECTABLE IF I  CAN GET THE TEXTVIEWS TO WORK
         TextView priceTextView = (TextView) findViewById(R.id.price_textview);
 
-        //below is to test searching along with other changes made on 8/20
-
-      //  if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
-      //      String query = getIntent().getStringExtra(SearchManager.QUERY);
-      //      Cursor searchCursor = ItemsSQLiteOpenHelper.getInstance(this).searchInventoryList(query);
-//
-      //      bandNameTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_BAND_NAME)));
-      //      albumTitleTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_ALBUM_TITLE)));
-      //      genreTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_GENRE)));
-      //      priceTextView.setText(searchCursor.getString(searchCursor.getColumnIndex(String.valueOf(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_PRICE))));
-//
-      //      searchCursor.close();
-      //  } else {
-      //      bandNameTextView.setText("Error: The selected item was not found!");
-      //  }
-
+        //BELOW CODE SETS THE SELECTED ALBUM INFO INTO THE VIEWS
 
         int selectedId = getIntent().getIntExtra("dbIndex",-1);
 
@@ -76,34 +59,20 @@ public class ItemActivity extends AppCompatActivity {
             priceTextView.setText(selectedItemCursor.getString(selectedItemCursor.getColumnIndex(String.valueOf(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_PRICE))));
 
             selectedItemCursor.close();
-        } else {
-            bandNameTextView.setText("Error: The selected item was not found!");
+
         }
 
-
+        //PREPARING THE CART
 
         cartSingleton = CartSingleton.getInstance();
         cartRecyclerViewAdapter = new CartRecyclerViewAdapter(cartSingleton.cartList);
         mRecyclerView = (RecyclerView) findViewById(R.id.cart_recyclerview);
 
-        //IS THIS SUPPOSED TO BE "THIS" HERE, SINCE IT'S MEANT TO ADJUST THE CART?
+
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
-        //      mRecyclerView.setLayoutManager(linearLayoutManager);
-        //      mRecyclerView.setAdapter(cartRecyclerViewAdapter);
 
-        //   final int position = getIntent().getIntExtra("position", 0);
-
-        cartSingleton = CartSingleton.getInstance();
-
-//
-        //   cartRecyclerViewAdapter = new CartRecyclerViewAdapter(cartSingleton.
-        //           cartList.get(position).getCartCustomObjectList());
-        //   mRecyclerView = (RecyclerView) findViewById(R.id.cart_recyclerview);
-        //
-        //   mRecyclerView.setLayoutManager(linearLayoutManager);
-        //   mRecyclerView.setAdapter(cartRecyclerViewAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -111,41 +80,17 @@ public class ItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-              //  ItemsSQLiteOpenHelper itemsSQLiteOpenHelper = ItemsSQLiteOpenHelper.getInstance(ItemActivity.this);
+               //PREPARES THE DIALOG TO ADD ITEMS TO THE CART
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
-                //      final RelativeLayout relativeLayout = new RelativeLayout(view.getContext());
-
-                //     final LinearLayout linearLayout = new LinearLayout(view.getContext());
-
-                //     final TextView bandNameConfirm = new TextView(view.getContext());
-                //     bandNameConfirm.setText("Test Band Name Confirm");
-                //     builder.setView(bandNameConfirm);
-//
-                //     final TextView albumTitleConfirm = new TextView(view.getContext());
-                //     albumTitleConfirm.setText("Test Album Title Confirm");
-                //     builder.setView(albumTitleConfirm);
-//
-                //     final TextView formatConfirm = new TextView(view.getContext());
-                //     formatConfirm.setText("Test Album Format Confirm");
-                //     builder.setView(formatConfirm);
-//
-                //   final TextView priceConfirm = new TextView(view.getContext());
-                //   priceConfirm.setText("Test Album Price Confirm");
-                //   builder.setView(priceConfirm);
-
-                //   final TextView confirmAdd = new TextView(view.getContext());
-                //   confirmAdd.setText("Are you sure you want to add this album to your cart?");
-                //   builder.setView(confirmAdd);
 
                 final TextView formatChoose = new TextView(view.getContext());
                 formatChoose.setText("Which format do you want?");
                 builder.setView(formatChoose);
 
-                //  builder.setView(relativeLayout);
 
-                //need to adjust this to a three button setup that selects betwween vinyl, cassette, and cd
+                //need to adjust this to a three button setup that selects between vinyl, cassette, and cd with a custom dialog
 
                 builder.setPositiveButton("Vinyl", null);
                 builder.setNegativeButton("Cancel", null);
@@ -158,38 +103,28 @@ public class ItemActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
 
+                                //ADDS ITEMS TO THE CART... IT ALMOST WORKS RIGHT. IT ADDS ITEMS BUT DOESN'T POPULATE THEM
 
                                 CartCustomObject newCartItem = new CartCustomObject
                                         (0, "Band Name", "Album Name", "Format", 0);
 
-                                //CartCustomObject newCartItem = new CartCustomObject();
 
                                 Toast.makeText(view.getContext(), "This... is a journey",
                                         Toast.LENGTH_SHORT).show();
 
-                                //            CartCustomObject newItem = new CartCustomObject(
-                                //                    bandNameConfirm.getText().toString(),
-                                //                    albumTitleConfirm.getText().toString(),
-                                //                    formatConfirm.getText().toString(),
-                                //                    priceConfirm.getText().toString(), false);
 
                                 ItemsSQLiteOpenHelper.getInstance(ItemActivity.this).insertRowCart(newCartItem);
 
-                                //cartRecyclerViewAdapter.notifyDataSetChanged();
-
                                 cartSingleton.cartList.add(newCartItem);
-
-                                addItemDialog.cancel();
                                 cartRecyclerViewAdapter.notifyDataSetChanged();
+                                addItemDialog.cancel();
+
                             }
                         }
                 );
             }
         });
-
-
 }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

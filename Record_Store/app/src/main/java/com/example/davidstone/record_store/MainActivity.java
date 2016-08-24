@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView mBandNameTextView;
 
-  //  List<CustomObjectMain> mCustomObjectsMainList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,32 +61,17 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-
-    //    mCustomObjectsMainList =  customObjectsMainList;
         mArrayList = ItemsSQLiteOpenHelper.
             getInstance(MainActivity.this).itemList();
         mRecyclerView = (RecyclerView) findViewById(R.id.mainrecyclerview);
         mainRecyclerViewAdapter = new MainRecyclerViewAdapter(mArrayList);
         mRecyclerView.setAdapter(mainRecyclerViewAdapter);
 
-      //  mArrayList = (ArrayList) ItemsSQLiteOpenHelper.getInstance(MainActivity.this).getInventoryList();
 
         mHelper = ItemsSQLiteOpenHelper.getInstance(this);
 
         mCursor = ItemsSQLiteOpenHelper.getInstance(MainActivity.this).getInventoryList();
         Log.d("cursor", mCursor.getCount()+"");
-
-        //mCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.
-        //        simple_list_item_1, mCursor, new String[]{ItemsSQLiteOpenHelper.
-        //        InventoryItem.COLUMN_BAND_NAME}, new int[]{android.R.id.text1}, 0);
-
-
-
-        //ItemsSQLiteOpenHelper.getInstance(MainActivity.this).getInventoryList().setA
-
-        //mCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1,
-        //        cursor, new String[]{ItemsSQLiteOpenHelper.InventoryItem.COLUMN_BAND_NAME}, new int[]{
-        //        android.R.id.text1}, 0);
 
 
         LinearLayoutManager linearLayoutManager =
@@ -99,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onEmptyDatabase() {
+
+        //POPULATES THE INVENTORY DATABASE IF IT DOESN'T ALREADY EXIST
 
         if ((ItemsSQLiteOpenHelper.getInstance(this).checkIfTableExists()) == false) {
 
@@ -132,34 +119,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
 
-
+        //SETS UP THE SEARCH
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-     //   MenuItem menuItem = menu.findItem(R.id.search_badge);
         SearchView searchView = (SearchView) menu.findItem(R.id.search_badge).
                 getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
 
-     //  MenuItemCompat.setOnActionExpandListener(menuItem, new MenuItemCompat.OnActionExpandListener() {
-
-     //      @Override
-     //      public boolean onMenuItemActionExpand(MenuItem item) {
-     //          return true;
-     //      }
-
-     //      @Override
-     //      public boolean onMenuItemActionCollapse(MenuItem item) {
-     //          Cursor cursor = mHelper.getInventoryList();
-     //          mCursorAdapter.changeCursor(cursor);
-     //          return true;
-     //      }
-     //  });
-
-     //   return super.onCreateOptionsMenu(menu);
+        //GOING TO ADD MORE SEARCH CAPACITY, RIGHT NOW IT ONLY SEARCHES BY BAND NAME
 
         return true;
     }
@@ -167,59 +139,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         Log.d("MainActivity", "onNewIntent: yeah");
-    //    setIntent(intent);
+
         handleIntent(intent);
 
-     //   mBandNameTextView = (TextView) findViewById(R.id.bandName_textview);
-//
-     //   if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-//
-     //       String query = getIntent().getStringExtra(SearchManager.QUERY);
-     //       if(query != null){
-     //           Log.d("cursor2", query);
-     //       }
-//
-     //       mCursor = ItemsSQLiteOpenHelper.getInstance(this).searchInventoryList(query);
-     //       Log.d("cursor2", mCursor.getCount()+"");
-//
-     //       mCursorAdapter = new CursorAdapter(this, mCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER) {
-//
-     //           @Override
-     //           public View newView(Context context, Cursor cursor, ViewGroup parent) {
-     //               return LayoutInflater.from(MainActivity.this).inflate(R.layout.activity_item, parent, false);
-     //           }
-//
-     //           @Override
-     //           public void bindView(View view, Context context, Cursor cursor) {
-     //               //         ListView items = (ListView) view.findViewById(R.id.item_list_view);
-//
-     //               TextView bandNameTextView = (TextView) findViewById(R.id.bandName_textview);
-     //               TextView albumTitleTextView = (TextView) findViewById(R.id.albumTitle_textview);
-     //               TextView genreTextView = (TextView) findViewById(R.id.genre_textview);
-//
-     //               // ADD AVAILABLE FORMATS VIEWS ANd MAKE THEM SELECTABLE IF I  CAN GET THE TEXTVIEWS TO WORK
-     //               TextView priceTextView = (TextView) findViewById(R.id.price_textview);
-//
-     //               bandNameTextView.setText(ItemsSQLiteOpenHelper.InventoryItem.COLUMN_BAND_NAME);
-//
-     //          //     Intent intent = new Intent(view.getContext(), ItemActivity.class);
-     //         //      intent.putExtra("dbIndex",customObjectsMainList.get(position).getmMainObjectID());
-     //         //      view.getContext().startActivity(intent);
-//
-//
-     //              // Toast.makeText(view.getContext(), customObjectMain.getmBandName() + " " +
-     //              //                 customObjectMain.getmAlbumTitle() + " is a great choice!",
-     //              //         Toast.LENGTH_SHORT).show();
-//
-     //         //      view.getContext().startActivity(intent);
-//
-     //           }
-     //       };
-//
-     //       //mCursorAdapter.changeCursor(mCursor);
-//
-     //    //   mListView.setAdapter(mCursorAdapter);
-     //   }
+
     }
 
     @Override
@@ -254,8 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void handleIntent(Intent intent) {
 
-      // mArrayList = ItemsSQLiteOpenHelper.
-      //         getInstance(MainActivity.this).itemList();
+        //SETS THE MAIN RECYCLERVIEW TO ONLY DISPLAY SEARCH MATCHES
 
         Log.d(TAG, "handleIntent: action: "+intent.getAction());
 
@@ -265,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
             mArrayList.clear();
             mArrayList.addAll(ItemsSQLiteOpenHelper.getInstance(MainActivity.this).searchInventoryList(query));
             Log.d(TAG, "handleIntent: result size: "+mArrayList.size());
-          //  mCursor = ItemsSQLiteOpenHelper.getInstance(MainActivity.this).getInventoryList();
+
 
             mainRecyclerViewAdapter.notifyDataSetChanged();
         }

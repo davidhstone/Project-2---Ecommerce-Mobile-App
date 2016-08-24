@@ -13,30 +13,7 @@ public class CartCustomObject {
     private String mAlbumTitle;
     private String mFormat;
     private double mPrice;
-  //  List<CartCustomObject> cartCustomObjectList;
 
-   // public CartCustomObject() {
-//
-   //     mCartObjectID = "cartObjectID";
-   //     mBandName = "bandName";
-   //     mAlbumTitle = "albumTitle";
-   //     mFormat = "albumFormat";
-   //     mPrice = 0.00;
-   //
-   // }
-
-  //  public List<CartCustomObject> getCartCustomObjectList(){
-  //      return cartCustomObjectList;
-  //  }
-
-  //  public void setCartCustomObjectList(List<CartCustomObject> cartCustomObjectList) {
-  //      if (cartCustomObjectList == null) {
-  //          this.cartCustomObjectList = new LinkedList<>();
-  //      }
-  //      else {
-  //          this.cartCustomObjectList = cartCustomObjectList;
-  //      }
-  //  }
 
    public CartCustomObject(int cartObjectID, String bandName, String albumTitle, String format, double price) {
 
@@ -46,12 +23,7 @@ public class CartCustomObject {
        mFormat = format;
        mPrice = price;
 
-  //     mCartObjectID = 1;
-  //     mBandName = bandName;
-  //     mAlbumTitle = albumTitle;
-  //     mFormat = format;
-  //     mPrice = price;
-  //  //   cartCustomObjectList = new LinkedList<>();
+
    }
 
     public int getmCartObjectID() {

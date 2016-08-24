@@ -4,6 +4,9 @@ package com.example.davidstone.record_store;
  * Created by davidstone on 7/28/16.
  */
 public class Item {
+
+    //EVEN THOUGH I'M NOT USING THIS RIGHT NOW, I"M KEEPING IT IN HERE TO POSSIBLY USE LATER
+
     private int mIcon;
     private String mBandName;
     private String mAlbumTitle;
