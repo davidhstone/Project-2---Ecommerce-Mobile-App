@@ -96,6 +96,7 @@ public class ItemActivity extends AppCompatActivity {
         //   final int position = getIntent().getIntExtra("position", 0);
 
         cartSingleton = CartSingleton.getInstance();
+
 //
         //   cartRecyclerViewAdapter = new CartRecyclerViewAdapter(cartSingleton.
         //           cartList.get(position).getCartCustomObjectList());
@@ -110,6 +111,7 @@ public class ItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+              //  ItemsSQLiteOpenHelper itemsSQLiteOpenHelper = ItemsSQLiteOpenHelper.getInstance(ItemActivity.this);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
@@ -156,10 +158,11 @@ public class ItemActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
 
+
                                 CartCustomObject newCartItem = new CartCustomObject
-                                        (0, "Band Name",
-                                                "Album Title",
-                                                "Format Type", 0);
+                                        (0, "Band Name", "Album Name", "Format", 0);
+
+                                //CartCustomObject newCartItem = new CartCustomObject();
 
                                 Toast.makeText(view.getContext(), "This... is a journey",
                                         Toast.LENGTH_SHORT).show();
@@ -170,7 +173,12 @@ public class ItemActivity extends AppCompatActivity {
                                 //                    formatConfirm.getText().toString(),
                                 //                    priceConfirm.getText().toString(), false);
 
+                                ItemsSQLiteOpenHelper.getInstance(ItemActivity.this).insertRowCart(newCartItem);
+
+                                //cartRecyclerViewAdapter.notifyDataSetChanged();
+
                                 cartSingleton.cartList.add(newCartItem);
+
                                 addItemDialog.cancel();
                                 cartRecyclerViewAdapter.notifyDataSetChanged();
                             }

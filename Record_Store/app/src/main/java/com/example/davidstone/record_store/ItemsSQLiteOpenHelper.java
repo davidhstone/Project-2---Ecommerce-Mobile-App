@@ -162,9 +162,9 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(Cart.COLUMN_BAND_NAME, cartCustomObject.getmBandName());
         values.put(Cart.COLUMN_ALBUM_TITLE, cartCustomObject.getmAlbumTitle());
         values.put(Cart.COLUMN_FORMAT, cartCustomObject.getmFormat());
-        values.put(Cart.COLUMN_PRICE, cartCustomObject.getmPrice());
+        values.put(String.valueOf(Cart.COLUMN_PRICE), cartCustomObject.getmPrice());
 
-        //db.insertOrThrow(Cart.TABLE_NAME, null, values);
+      //  db.insertOrThrow(Cart.TABLE_NAME, null, values);
 
         long returnCartId = db.insert(Cart.TABLE_NAME, null, values);
         db.close();
@@ -384,5 +384,5 @@ public class ItemsSQLiteOpenHelper extends SQLiteOpenHelper {
         cursor.close();
         return searchList;
     }
-
 }
+

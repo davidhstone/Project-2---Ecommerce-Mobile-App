@@ -18,6 +18,8 @@ public class CartActivity extends AppCompatActivity {
     CartRecyclerViewAdapter cartRecyclerViewAdapter;
     CartSingleton cartSingleton;
 
+    ArrayList mArrayList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
